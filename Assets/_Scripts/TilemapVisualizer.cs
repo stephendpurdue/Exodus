@@ -18,6 +18,7 @@ public class TilemapVisualizer : MonoBehaviour
         PaintTiles(floorPositions, floorTilemap, floorTile);
     }
 
+    // Paints the given tiles on the tilemap at the specified positions. Loops t
     private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
     {
         foreach (var position in positions)
@@ -26,6 +27,7 @@ public class TilemapVisualizer : MonoBehaviour
         }   
     }
 
+    // Paints a single tile on the tilemap at the given position.
     private void PaintSingleTile(Tilemap tilemap, TileBase tile, Vector2Int position)
     {
         var tilePosition = tilemap.WorldToCell((Vector3Int)position);
