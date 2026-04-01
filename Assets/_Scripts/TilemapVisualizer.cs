@@ -9,6 +9,7 @@ public class TilemapVisualizer : MonoBehaviour
     private Tilemap floorTilemap;
 
     // The tile that will be used to visualize the floor tiles on the tilemap.
+    [SerializeField]
     private TileBase floorTile;
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
@@ -29,5 +30,11 @@ public class TilemapVisualizer : MonoBehaviour
     {
         var tilePosition = tilemap.WorldToCell((Vector3Int)position);
         tilemap.SetTile(tilePosition, tile);
+    }
+
+    // Clears all the tiles from the floor tilemap.
+    public void Clear()
+    {
+        floorTilemap.ClearAllTiles();
     }
 }

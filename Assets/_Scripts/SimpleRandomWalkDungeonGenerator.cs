@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
+
+
 public class SimpleRandomWalkMapGenerator : MonoBehaviour
 {
     [SerializeField]
@@ -23,6 +26,7 @@ public class SimpleRandomWalkMapGenerator : MonoBehaviour
     public void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk();
+        tilemapVisualizer.Clear();
         tilemapVisualizer.PaintFloorTiles(floorPositions);
     }
 
