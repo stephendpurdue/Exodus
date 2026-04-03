@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine;
+using System;
 
 public class TilemapVisualizer : MonoBehaviour
 {
     [SerializeField] 
-    private Tilemap floorTilemap;
+    private Tilemap floorTilemap, wallTilemap;
 
     // The tile that will be used to visualize the floor tiles on the tilemap.
     [SerializeField]
-    private TileBase floorTile;
+    private TileBase floorTile, wallTop;
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
@@ -27,6 +28,11 @@ public class TilemapVisualizer : MonoBehaviour
         }   
     }
 
+    internal void PaintSingleBasicWall(Vector2Int position)
+    {
+        PaintSingleTile(wallTilemap, wallTop, position);
+    }
+
     // Paints a single tile on the tilemap at the given position.
     private void PaintSingleTile(Tilemap tilemap, TileBase tile, Vector2Int position)
     {
@@ -39,4 +45,5 @@ public class TilemapVisualizer : MonoBehaviour
     {
         floorTilemap.ClearAllTiles();
     }
+
 }
