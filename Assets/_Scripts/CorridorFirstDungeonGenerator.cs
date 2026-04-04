@@ -29,6 +29,8 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
         HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions);
 
+        floorPositions.UnionWith(roomPositions);
+
         tilemapVisualizer.PaintFloorTiles(floorPositions);
         WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
     }
