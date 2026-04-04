@@ -6,7 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
+public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
 {
 
     [SerializeField]
@@ -20,6 +20,7 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
         WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
     }
 
+    // This method runs a simple random walk algorithm to generate floor positions for the dungeon. It takes in the parameters for the random walk and returns a HashSet of Vector2Int representing the floor positions.
     protected HashSet<Vector2Int> RunRandomWalk(SimpleRandomWalkSO parameters)
     {
         var currentPosition = startPosition;
