@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-
+// This class generates a dungeon using a simple random walk algorithm. It inherits from AbstractDungeonGenerator and overrides the RunProceduralGeneration method to implement the specific logic for generating the dungeon using a simple random walk.
 public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
 {
 

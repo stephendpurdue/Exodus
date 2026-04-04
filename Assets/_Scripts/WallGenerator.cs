@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This class is responsible for generating walls around the floor positions of the dungeon. It takes in a HashSet of Vector2Int representing the floor positions and a TilemapVisualizer to paint the walls on the tilemap.
 public static class WallGenerator 
 {
     public static void CreateWalls(HashSet<Vector2Int> floorPositions, TilemapVisualizer tilemapVisualizer)
