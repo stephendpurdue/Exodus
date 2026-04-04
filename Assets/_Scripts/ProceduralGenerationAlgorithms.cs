@@ -19,7 +19,25 @@ public static class ProceduralGenerationAlgorithms
         }
         return path;
     }
+
+    // This method is used to create a corridor by using the random walk algorithm. It takes a start position and a corridor length as parameters and returns a list of Vector2Int positions that represent the corridor.
+    public static List<Vector2Int> RandomWalkCorridor(Vector2Int startPosition, int corridorLength)
+    {
+        List<Vector2Int> corridor = new List<Vector2Int>();
+        var direction = Direction2D.GetRandomCardinalDirection();
+        var currentPosition = startPosition;
+        corridor.Add(currentPosition);
+
+        for (int i = 0; i < corridorLength; i++)
+        {
+            currentPosition += direction;
+            corridor.Add(currentPosition);
+        }
+        return corridor;
+    }
 }
+
+
 
 public static class Direction2D // This class gets the random direction.
 {
