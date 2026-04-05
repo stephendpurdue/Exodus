@@ -29,10 +29,45 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
         HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions);
 
+        List<Vector2Int> deadEnds = FindAllDeadEnds(floorPositions);
+
+        CreateRoomsAtDeadEnd(deadEnds, roomPositions);
+
         floorPositions.UnionWith(roomPositions);
 
         tilemapVisualizer.PaintFloorTiles(floorPositions);
         WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
+    }
+
+    // This method creates rooms at the end of the corridors if there are any dead ends that are not already part of a room.
+    private void CreateRoomsAtDeadEnd(List<Vector2Int> deadEnds, HashSet<Vector2Int> roomFloors)
+    {
+        foreach (var position in deadEnds)
+        {
+            if(roomFloors.Contains(position) == false)
+            {
+                var room = RunRandomWalk(randomWalkParameters, position);
+                roomFloors.UnionWith(room);
+            }
+        }
+    }
+
+    // This method finds all the dead ends in the corridors, which are positions that have only one neighboring floor tile.
+    private List<Vector2Int> FindAllDeadEnds(HashSet<Vector2Int> floorPositions)
+    {
+        List<Vector2Int> deadEnds = new List<Vector2Int>();
+        foreach (var position in floorPositions)
+        {
+            int neighboursCount = 0;
+            foreach (var direction in Direction2D.cardinalDirectionsList)
+            {
+                if (floorPositions.Contains(position + direction))
+                    neighboursCount++;
+            }
+            if (neighboursCount == 1)
+                deadEnds.Add(position);
+        }
+        return deadEnds;
     }
 
     // This method creates rooms at the end of the corridors and adds their positions to the roomPositions HashSet.
