@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public static class ProceduralGenerationAlgorithms
 {
@@ -80,6 +82,29 @@ public static class ProceduralGenerationAlgorithms
             }
         }
         return roomsList;
+    }
+
+    // This method is used to split a space vertically into two smaller rooms. It takes the minimum width for the rooms, a queue of BoundsInt objects that represent the rooms to split, and a BoundsInt object that represents the room to split as parameters.
+    // It creates two new BoundsInt objects that represent the two new rooms created from the split and adds them to the queue of rooms to split.
+    private static void SplitVertically(int minWidth, Queue<BoundsInt> roomsQueue, BoundsInt room)
+    {
+        var xSplit = Random.Range(1, room.size.x);
+        BoundsInt room1 = new BoundsInt(room.min, new Vector3Int(xSplit, room.min.y, room.min.z));
+        BoundsInt room2 = new BoundsInt(new Vector3Int(room.min.x + xSplit, room.min.y, room.min.z), 
+            new Vector3Int(room.size.x - xSplit, room.size.y, room.size.z));
+        roomsQueue.Enqueue(room1);
+        roomsQueue.Enqueue(room2);
+    }
+
+    private static void SplitHorizontally(int minHeight, Queue<BoundsInt> roomsQueue, BoundsInt room)
+    {
+        var ySplit = Random.Range(1, room.size.y); // minHeight, room.size.y - minHeight)
+        BoundsInt room1 = new BoundsInt(room.min, new Vector3Int(room.size.x, ySplit, room.size.z));
+        BoundsInt room2 = new BoundsInt(new Vector3Int(room.min.x, room.min.y + ySplit, room.min.z),
+            new Vector3Int(room.size.x, room.size.y - ySplit, room.size.z));
+        roomsQueue.Enqueue(room1);
+        roomsQueue.Enqueue(room2);
+
     }
 }
 
