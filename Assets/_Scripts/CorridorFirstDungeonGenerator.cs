@@ -44,7 +44,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     {
         foreach (var position in deadEnds)
         {
-            if(roomFloors.Contains(position) == false)
+            if (roomFloors.Contains(position) == false)
             {
                 var room = RunRandomWalk(randomWalkParameters, position);
                 roomFloors.UnionWith(room);
