@@ -35,10 +35,56 @@ public static class ProceduralGenerationAlgorithms
         }
         return corridor;
     }
+
+    // This method is used to split a space into smaller rooms using the binary space partitioning algorithm. It takes a BoundsInt object that represents the space to split, and minimum width and height for the rooms as parameters. It returns a list of BoundsInt objects that represent the rooms created from the split.
+    public static List<BoundsInt> BinarySpacePartitioning(BoundsInt spaceToSplit, int minWidth, int minHeight)
+    {
+        Queue<BoundsInt> roomsQueue = new Queue<BoundsInt>();
+        List<BoundsInt> roomsList = new List<BoundsInt>();
+        roomsQueue.Enqueue(spaceToSplit);
+        while (roomsQueue.Count > 0)
+        {
+            var room = roomsQueue.Dequeue();
+            if (room.size.y >= minHeight && room.size.x >= minWidth)
+            {
+                if (Random.value < 0.5f)
+                {
+                    if (room.size.y >= minHeight * 2)
+                    {
+                        SplitHorizontally(minHeight, roomsQueue, room);
+                    }
+                    else if (room.size.x >= minWidth * 2)
+                    {
+                        SplitVertically(minWidth, roomsQueue, room);
+                    }
+                    else if (room.size.x >= minWidth && room.size.y >= minHeight)
+                    {
+                        roomsList.Add(room);
+                    }
+                }
+                else
+                {
+                    if (room.size.x >= minWidth * 2)
+                    {
+                        SplitVertically(minWidth, roomsQueue, room);
+                    }
+                    else if (room.size.y >= minHeight * 2)
+                    {
+                        SplitHorizontally(minHeight, roomsQueue, room);
+                    }
+                    else if (room.size.x >= minWidth && room.size.y >= minHeight)
+                    {
+                        roomsList.Add(room);
+                    }
+                }
+            }
+        }
+        return roomsList;
+    }
 }
 
 
-
+// This class is used to get the random direction for the random walk algorithm. It contains a list of cardinal directions (up, right, down, left) and a method to get a random cardinal direction from the list.
 public static class Direction2D // This class gets the random direction.
 {
     public static List<Vector2Int> cardinalDirectionsList = new List<Vector2Int>
