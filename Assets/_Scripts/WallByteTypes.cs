@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class WallByteTypes
+// This class contains the different wall types based on the bitmask of the surrounding walls.
+// Each wall type corresponds to a specific configuration of neighboring walls, which can be used to determine how to render the wall in a tile-based game.
+public static class WallTypesHelper
 {
     public static HashSet<int> wallTop = new HashSet<int>
     {
