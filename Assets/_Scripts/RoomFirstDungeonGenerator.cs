@@ -34,6 +34,18 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
     private HashSet<Vector2Int> CreateSimpleRooms(List<BoundsInt> roomList)
     {
-        throw new NotImplementedException();
+        HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+        foreach (var room in roomList)
+        {
+            for (int col = offset; col < room.size.x - offset; col++)
+            {
+                for (int  row = offset;  row < room.size.y - offset;  row++)
+                {
+                    Vector2Int position = (Vector2Int)room.min + new Vector2Int(col, row);
+                    floor.Add(position);
+                }
+            }
+        }
+        return floor;
     }
 }
