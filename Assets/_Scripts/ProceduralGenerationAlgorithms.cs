@@ -128,7 +128,7 @@ public static class Direction2D // This class gets the random direction.
         new Vector2Int(-1, 1) // LEFT-UP
     };
 
-    public static List<Vector2Int> eightDIrectionsList = new List<Vector2Int>
+    public static List<Vector2Int> eightDirectionsList = new List<Vector2Int>
     {
         new Vector2Int(0,1), // UP
         new Vector2Int(1,1), // UP-RIGHT
