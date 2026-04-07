@@ -32,8 +32,9 @@ public static class WallGenerator
                     neighboursBinaryType += "0";
                 }
             }
+            tilemapVisualizer.PaintSingleCornerWall(position, neighboursBinaryType);
         }
-        tilemapVisualizer.PaintSingleCornerWall(position, neighboursBinaryType);
+       
     }
 
     // This method will create the basic walls around the floor positions. It will loop through the basic wall positions and check the neighbouring floor positions in the cardinal directions.

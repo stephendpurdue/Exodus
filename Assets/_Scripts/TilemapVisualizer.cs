@@ -47,4 +47,8 @@ public class TilemapVisualizer : MonoBehaviour
         wallTilemap.ClearAllTiles();
     }
 
+    internal void PaintSingleCornerWall(Vector2Int position, string neighboursBinaryType)
+    {
+        throw new NotImplementedException();
+    }
 }
