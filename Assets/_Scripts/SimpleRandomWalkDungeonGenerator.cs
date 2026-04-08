@@ -18,6 +18,7 @@ public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
         tilemapVisualizer.Clear();
         tilemapVisualizer.PaintFloorTiles(floorPositions);
         WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
+        NotifyGenerationComplete(floorPositions);
     }
 
     // This method runs a simple random walk algorithm to generate floor positions for the dungeon. It takes in the parameters for the random walk and returns a HashSet of Vector2Int representing the floor positions.

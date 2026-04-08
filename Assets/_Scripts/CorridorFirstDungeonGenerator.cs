@@ -37,6 +37,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
         tilemapVisualizer.PaintFloorTiles(floorPositions);
         WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
+        NotifyGenerationComplete(floorPositions);
     }
 
     // This method creates rooms at the end of the corridors if there are any dead ends that are not already part of a room.

@@ -52,6 +52,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
         tilemapVisualizer.PaintFloorTiles(floor);
         WallGenerator.CreateWalls(floor, tilemapVisualizer);
+        NotifyGenerationComplete(floor);
     }
 
     // This method creates rooms randomly by starting from the center of each room and performing a random walk to create floor positions for the room.
