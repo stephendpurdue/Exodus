@@ -4,6 +4,8 @@ using UnityEngine.Tilemaps;
 using UnityEngine;
 using System;
 
+// This class is responsible for visualizing the tilemap based on the floor and wall positions.
+// It uses the Tilemap component to paint the tiles on the screen.
 public class TilemapVisualizer : MonoBehaviour
 {
     [SerializeField] 
@@ -11,7 +13,7 @@ public class TilemapVisualizer : MonoBehaviour
 
     // The tile that will be used to visualize the floor tiles on the tilemap.
     [SerializeField]
-    private TileBase floorTile, wallTop;
+    private TileBase floorTile, wallTop, wallSideRight, wallSideLeft, wallBottom, wallFull;
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
@@ -28,10 +30,18 @@ public class TilemapVisualizer : MonoBehaviour
         }   
     }
 
+    // Paints a single wall tile on the tilemap based on the binary type of the wall.
+    // The binary type represents the configuration of neighboring walls, which determines how the wall should be rendered.
     internal void PaintSingleBasicWall(Vector2Int position, string binaryType)
     {
-        Debug.Log(position + " type: " + binaryType);
-        PaintSingleTile(wallTilemap, wallTop, position);
+        int typeAsInt = Convert.ToInt32(binaryType, 2); // Converts Binary to Integer.
+        TileBase tile = null;
+        if (WallTypesHelper.wallTop.Contains(typeAsInt))
+        {
+            tile = wallTop;
+        }
+        if (tile!= null)
+            PaintSingleTile(wallTilemap, wallTop, position);
     }
 
     // Paints a single tile on the tilemap at the given position.
