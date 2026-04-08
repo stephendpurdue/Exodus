@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public abstract class AbstractDungeonGenerator : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public abstract class AbstractDungeonGenerator : MonoBehaviour
 
     public void GenerateDungeon()
     {
+        Random.InitState(System.Environment.TickCount);
         tilemapVisualizer.Clear();
         RunProceduralGeneration();
     }

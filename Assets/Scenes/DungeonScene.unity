@@ -128,6 +128,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2787853031306872292, guid: fde7c94d8705b1a41b811f6735e10b37, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2787853031306872292, guid: fde7c94d8705b1a41b811f6735e10b37, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2787853031306872292, guid: fde7c94d8705b1a41b811f6735e10b37, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2787853031306872292, guid: fde7c94d8705b1a41b811f6735e10b37, type: 3}
       propertyPath: m_LocalPosition.x
       value: 123.35058
       objectReference: {fileID: 0}
@@ -167,14 +179,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Size.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Size.y
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 7009766015829555140, guid: fde7c94d8705b1a41b811f6735e10b37, type: 3}
       propertyPath: m_Color.b
       value: 0.21960786
@@ -195,6 +199,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 8158561848987993824, guid: fde7c94d8705b1a41b811f6735e10b37, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8260805920969396281, guid: fde7c94d8705b1a41b811f6735e10b37, type: 3}
       propertyPath: m_Name
       value: Player
@@ -640,9 +648,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 34
+  field of view: 45
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
