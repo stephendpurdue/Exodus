@@ -40,8 +40,24 @@ public class TilemapVisualizer : MonoBehaviour
         {
             tile = wallTop;
         }
+        else if (WallTypesHelper.wallSideRight.Contains(typeAsInt))
+        {
+            tile = wallSideRight;
+        }
+        else if (WallTypesHelper.wallSideLeft.Contains(typeAsInt))
+        {
+            tile = wallSideLeft;
+        }
+        else if (WallTypesHelper.wallBottom.Contains(typeAsInt))
+        {
+            tile = wallBottom;
+        }
+        else if (WallTypesHelper.wallFull.Contains(typeAsInt))
+        {
+            tile = wallFull;
+        }
         if (tile!= null)
-            PaintSingleTile(wallTilemap, wallTop, position);
+            PaintSingleTile(wallTilemap, tile, position);
     }
 
     // Paints a single tile on the tilemap at the given position.
