@@ -30,6 +30,7 @@ public class TilemapVisualizer : MonoBehaviour
 
     internal void PaintSingleBasicWall(Vector2Int position, string binaryType)
     {
+        Debug.Log(position + " type: " + binaryType);
         PaintSingleTile(wallTilemap, wallTop, position);
     }
 
@@ -49,6 +50,6 @@ public class TilemapVisualizer : MonoBehaviour
 
     internal void PaintSingleCornerWall(Vector2Int position, string neighboursBinaryType)
     {
-        throw new NotImplementedException();
+
     }
 }
