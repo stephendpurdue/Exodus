@@ -8,15 +8,11 @@ using UnityEngine.UI;
 /// </summary>
 public class GameHUD : MonoBehaviour
 {
-    [Header("Scene Settings")]
-    [Tooltip("Exact name of your main menu scene as it appears in Build Settings.")]
     [SerializeField] private string mainMenuSceneName = "MainMenu";
 
-    [Header("UI References")]
     [SerializeField] private Button regenerateButton;
     [SerializeField] private Button mainMenuButton;
 
-    [Header("Dungeon Reference")]
     [SerializeField] private DungeonManager dungeonManager;
 
     private void Start()

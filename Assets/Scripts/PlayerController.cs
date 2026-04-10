@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayers;
     private Vector2 moveInput;
 
     private void Awake()
@@ -40,22 +44,37 @@ public class PlayerController : MonoBehaviour
         if (moveInput.sqrMagnitude > 1f)
             moveInput.Normalize();
 
-        // Flip sprite based on horizontal direction
         if (moveInput.x > 0.01f)
             spriteRenderer.flipX = false;
         else if (moveInput.x < -0.01f)
             spriteRenderer.flipX = true;
 
-        // Drive animator if one exists
         if (animator != null)
-        {
             animator.SetBool("isMoving", moveInput.sqrMagnitude > 0.01f);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Attack();
         }
     }
 
     private void FixedUpdate()
     {
-        // Velocity-based movement — smoother than MovePosition when combined with interpolation
         rb.linearVelocity = moveInput * moveSpeed;
+    }
+
+    void Attack()
+    {
+        // Play attack animation
+        animator.SetTrigger("Attack");
+
+        // Detect enemies in range of attack
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        // Damage enemies
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("Hit " + enemy.name);
+        }
     }
 }

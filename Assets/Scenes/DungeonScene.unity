@@ -214,8 +214,25 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8260805920969396281, guid: fde7c94d8705b1a41b811f6735e10b37, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 591001943}
+      addedObject: {fileID: 49584908}
   m_SourcePrefab: {fileID: 100100000, guid: fde7c94d8705b1a41b811f6735e10b37, type: 3}
+--- !u!1 &49584907 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8260805920969396281, guid: fde7c94d8705b1a41b811f6735e10b37, type: 3}
+  m_PrefabInstance: {fileID: 49584906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &49584908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49584907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd9cc141a55ecd42aa81667bce7de1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
 --- !u!1 &55162815
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -120, y: -40}
+  m_AnchoredPosition: {x: -120, y: -46.299988}
   m_SizeDelta: {x: 114.414795, y: 18.7529}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &414186242
@@ -729,47 +746,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!1 &591001937 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8260805920969396281, guid: fde7c94d8705b1a41b811f6735e10b37, type: 3}
-  m_PrefabInstance: {fileID: 49584906}
-  m_PrefabAsset: {fileID: 0}
---- !u!58 &591001943
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 591001937}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.15, y: 0.15}
-  m_Radius: 0.1171875
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -12482,9 +12458,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'MainMenu
-
-'
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12787,7 +12761,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -120, y: -40}
+  m_AnchoredPosition: {x: -120, y: -70.5}
   m_SizeDelta: {x: 114.414795, y: 18.7529}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1576552149
