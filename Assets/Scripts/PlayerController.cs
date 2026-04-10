@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
 
     private Rigidbody2D rb;
@@ -52,7 +51,7 @@ public class PlayerController : MonoBehaviour
         if (animator != null)
             animator.SetBool("isMoving", moveInput.sqrMagnitude > 0.01f);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKey(KeyCode.Space))
         {
             Attack();
         }
@@ -76,5 +75,13 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Hit " + enemy.name);
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

@@ -8,15 +8,10 @@ using UnityEngine.Tilemaps;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    [Header("References")]
     [SerializeField] private GameObject playerPrefab;
 
-    [Header("Tilemap Reference")]
-    [Tooltip("Assign your floor Tilemap here so spawn positions match tile world positions.")]
     [SerializeField] private Tilemap floorTilemap;
 
-    [Header("Spawn Settings")]
-    [Tooltip("If true, picks a random floor tile. If false, picks the tile closest to the dungeon's centre of mass.")]
     [SerializeField] private bool randomSpawnPoint = false;
 
     private GameObject playerInstance;

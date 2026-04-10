@@ -2,13 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-/// Main menu controller. Attach to a Canvas in your "MainMenu" scene.
-/// The Play button loads the dungeon scene (which auto-generates via DungeonManager.Start()).
-/// Quit exits the application (no-op in the Editor).
 public class MainMenuUI : MonoBehaviour
 {
-    [Header("Scene Settings")]
-    [Tooltip("Exact name of your dungeon scene as it appears in Build Settings.")]
     [SerializeField] private string dungeonSceneName = "DungeonScene";
 
     [Header("UI References")]

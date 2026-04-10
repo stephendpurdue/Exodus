@@ -18,7 +18,7 @@ public class CameraFollow : MonoBehaviour
         if (target == null)
         {
             // Auto-find player if not assigned (handles first-time spawn)
-            var player = FindObjectOfType<PlayerController>();
+            var player = Object.FindFirstObjectByType<PlayerController>();
             if (player != null)
                 target = player.transform;
             else
