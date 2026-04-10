@@ -3,13 +3,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-/// <summary>
 /// Spawns the player on a valid floor tile after dungeon generation.
-/// Converts tile grid positions to world positions using the actual floor Tilemap
-/// so the player lands exactly where the tiles are rendered.
-/// On the first call it instantiates the prefab; on subsequent calls (regeneration)
-/// it repositions the existing instance to avoid GameObject accumulation.
-/// </summary>
+/// Converts tile grid positions to world positions using the actual floor Tilemap.
+
 public class PlayerSpawner : MonoBehaviour
 {
     [Header("References")]
@@ -25,9 +21,7 @@ public class PlayerSpawner : MonoBehaviour
 
     private GameObject playerInstance;
 
-    /// <summary>
     /// Called by DungeonManager after generation completes.
-    /// </summary>
     public void SpawnPlayer(HashSet<Vector2Int> floorPositions)
     {
         if (floorPositions == null || floorPositions.Count == 0)
@@ -53,8 +47,6 @@ public class PlayerSpawner : MonoBehaviour
             // Fallback if tilemap not assigned
             worldPos = new Vector3(spawnTile.x + 0.5f, spawnTile.y + 0.5f, 0f);
         }
-
-        Debug.Log($"[PlayerSpawner] Spawning at tile {spawnTile} → world {worldPos}");
 
         if (playerInstance == null)
         {

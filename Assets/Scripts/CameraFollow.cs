@@ -1,10 +1,8 @@
 using UnityEngine;
 
-/// <summary>
 /// Smooth camera follow for the player in a top-down 2D dungeon.
 /// Uses LateUpdate so the camera moves after all player physics have resolved.
 /// The Z offset keeps the camera at the correct rendering depth.
-/// </summary>
 public class CameraFollow : MonoBehaviour
 {
     [Header("Target")]
