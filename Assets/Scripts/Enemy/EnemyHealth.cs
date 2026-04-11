@@ -19,6 +19,7 @@ public class EnemyHealth : MonoBehaviour
     [Header("Death")]
     [SerializeField] private float deathDelay = 0.3f; // small delay so death flash is visible
 
+    private Animator animator;
     private SpriteRenderer spriteRenderer;
     private Color originalColour;
     private bool isDead = false;
@@ -69,6 +70,9 @@ public class EnemyHealth : MonoBehaviour
         // Flash white on death
         if (spriteRenderer != null)
             spriteRenderer.color = Color.white;
+
+        if (animator != null)
+            animator.SetTrigger("Death");
 
         yield return new WaitForSeconds(deathDelay);
 
