@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         attackTimer -= Time.deltaTime;
 
         // ── Attack input ──────────────────────────────────────────────────
-        if (Input.GetKey(KeyCode.Space) && attackTimer <= 0f)
+        if (Input.GetKeyDown(KeyCode.Space) && attackTimer <= 0f)
         {
             Attack();
             attackTimer = attackCooldown;

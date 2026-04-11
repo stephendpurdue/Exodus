@@ -9,7 +9,6 @@
 
 using System.Collections;
 using UnityEngine;
-using TMPro;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -17,13 +16,13 @@ public class HealthSystem : MonoBehaviour
 
 	[Header("Health")]
 	public RectTransform currentHealthBar;
-	public TextMeshProUGUI healthText;
+	public UnityEngine.UI.Text healthText;
 	public float hitPoint = 100f;
 	public float maxHitPoint = 100f;
 
 	[Header("Mana")]
 	public RectTransform currentManaBar;
-	public TextMeshProUGUI manaText;
+	public UnityEngine.UI.Text manaText;
 	public float manaPoint = 100f;
 	public float maxManaPoint = 100f;
 

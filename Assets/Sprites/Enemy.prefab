@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 7103659138862118928}
   - component: {fileID: 6469362924963924838}
   - component: {fileID: 1293003143459030100}
-  m_Layer: 0
+  - component: {fileID: 7238496222654325333}
+  - component: {fileID: -5715855360090911943}
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +84,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_MaskInteraction: 0
   m_Sprite: {fileID: -371990891160990251, guid: c0b1e185965eacf4c83df7ec2294e572, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -128,7 +130,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -179,3 +181,40 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.25
+--- !u!114 &7238496222654325333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861906025771250447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d992b3aa7d8ac0d419de336510958959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  detectionRange: 5
+  loseAggroRange: 8
+  moveSpeed: 2.5
+  attackRange: 0.8
+  attackDamage: 10
+  attackCooldown: 1.2
+  wanderRadius: 2
+  wanderInterval: 3
+--- !u!114 &-5715855360090911943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861906025771250447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24ab71fc919e1db47b61c9b5f6aa5c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHealth: 30
+  currentHealth: 0
+  hurtColour: {r: 1, g: 0, b: 0, a: 1}
+  hurtFlashDuration: 0.15
+  deathDelay: 0.3
