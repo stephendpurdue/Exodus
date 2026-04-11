@@ -137,9 +137,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 5
   attackPoint: {fileID: 2299883968447015855}
-  attackRange: 0.5
-  attackDamage: 10
-  attackCooldown: 0.4
+  attackRange: 1
+  attackDamage: 15
+  attackCooldown: 0.2
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -226,7 +226,7 @@ Transform:
   m_GameObject: {fileID: 8942760382544536447}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.092, y: 0, z: 0}
+  m_LocalPosition: {x: 0.1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
