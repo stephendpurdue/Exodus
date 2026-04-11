@@ -1,17 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// Simple 3-state FSM for a top-down 2D enemy.
-///
 /// States:
 ///   Idle    — enemy stands still, briefly patrolling if a wander radius is set.
 ///   Chase   — player entered detection range; enemy steers directly toward them.
 ///   Attack  — player is within melee range; enemy deals damage on a cooldown.
-///
-/// Requires: Rigidbody2D (Dynamic, gravity 0, FreezeRotation) on the same GameObject.
 /// The player must be on a layer included in playerLayer.
-/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyAI : MonoBehaviour
 {
@@ -182,6 +176,8 @@ public class EnemyAI : MonoBehaviour
             if (dir.x > 0.01f)       spriteRenderer.flipX = false;
             else if (dir.x < -0.01f) spriteRenderer.flipX = true;
         }
+
+        GetComponent<Animator>().SetBool("isMoving", currentState == State.Chase);
     }
 
     // ── Gizmos: visualise ranges in the Scene view ───────────────────────

@@ -21,8 +21,10 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     // Stored after generation so DungeonManager can pass them to EnemySpawner
     private List<Vector2Int> roomCenters = new List<Vector2Int>();
 
-    // Returns the list of room centre positions from the most recent generation.
-    // Called by DungeonManager to pass spread data to EnemySpawner.
+    /// <summary>
+    /// Returns the list of room centre positions from the most recent generation.
+    /// Called by DungeonManager to pass spread data to EnemySpawner.
+    /// </summary>
     public List<Vector2Int> GetRoomCenters() => roomCenters;
 
     protected override void RunProceduralGeneration()
@@ -55,7 +57,8 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
             roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
         }
 
-        HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
+        // Pass a copy so ConnectRooms doesn't mutate the stored roomCenters list
+        HashSet<Vector2Int> corridors = ConnectRooms(new List<Vector2Int>(roomCenters));
         floor.UnionWith(corridors);
 
         tilemapVisualizer.PaintFloorTiles(floor);

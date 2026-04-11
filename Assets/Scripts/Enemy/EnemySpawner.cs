@@ -39,23 +39,35 @@ public class EnemySpawner : MonoBehaviour
     {
         ClearEnemies();
 
-        if (floorPositions == null || floorPositions.Count == 0 || enemyPrefabs == null || enemyPrefabs.Length == 0)
+        Debug.Log($"[EnemySpawner] SpawnEnemies called. FloorTiles={floorPositions?.Count ?? 0}, RoomCenters={roomCenters?.Count ?? 0}, Prefabs={enemyPrefabs?.Length ?? 0}");
+
+        if (floorPositions == null || floorPositions.Count == 0)
+        {
+            Debug.LogError("[EnemySpawner] ABORT: floorPositions is null or empty.");
             return;
+        }
+        if (enemyPrefabs == null || enemyPrefabs.Length == 0)
+        {
+            Debug.LogError("[EnemySpawner] ABORT: No enemy prefabs assigned in the Inspector.");
+            return;
+        }
 
         lastFloorPositions = floorPositions;
-
         enemyContainer = new GameObject("--- Enemies ---").transform;
 
-        // Get the player's current world position for distance check
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         Vector2? playerPos = playerObj != null ? (Vector2?)playerObj.transform.position : null;
+        Debug.Log($"[EnemySpawner] Player found: {playerObj != null}, PlayerPos: {playerPos}");
+        Debug.Log($"[EnemySpawner] FloorTilemap assigned: {floorTilemap != null}");
 
         if (roomCenters != null && roomCenters.Count > 0)
         {
+            Debug.Log($"[EnemySpawner] Using SpawnByRoom with {roomCenters.Count} rooms.");
             SpawnByRoom(floorPositions, roomCenters, playerPos);
         }
         else
         {
+            Debug.Log("[EnemySpawner] Using SpawnRandom fallback.");
             SpawnRandom(floorPositions, playerPos);
         }
     }
@@ -71,15 +83,18 @@ public class EnemySpawner : MonoBehaviour
     // Preferred: scatter enemies around each room centre
     private void SpawnByRoom(HashSet<Vector2Int> floorPositions, List<Vector2Int> roomCenters, Vector2? playerPos)
     {
+        int totalSpawned = 0;
         foreach (var centre in roomCenters)
         {
-            // Collect floor tiles near this room centre (within 6 tiles)
             var candidates = floorPositions
                 .Where(t => Vector2Int.Distance(t, centre) <= 6f)
                 .ToList();
 
+            Debug.Log($"[EnemySpawner] Room at {centre}: {candidates.Count} candidate tiles.");
+
             int spawned = 0;
             int attempts = 0;
+            int skippedDist = 0;
 
             while (spawned < enemiesPerRoom && attempts < 30 && candidates.Count > 0)
             {
@@ -90,26 +105,33 @@ public class EnemySpawner : MonoBehaviour
 
                 Vector3 worldPos = TileToWorld(tile);
 
-                // Skip if too close to the player
                 if (playerPos.HasValue && Vector2.Distance(worldPos, playerPos.Value) < minSpawnDistFromPlayer)
+                {
+                    skippedDist++;
                     continue;
+                }
 
                 SpawnEnemyAt(worldPos);
                 spawned++;
+                totalSpawned++;
             }
+
+            if (spawned == 0)
+                Debug.LogWarning($"[EnemySpawner] Room at {centre}: 0 enemies spawned. Skipped by distance: {skippedDist}, Candidates exhausted: {candidates.Count == 0}");
         }
+        Debug.Log($"[EnemySpawner] SpawnByRoom complete. Total spawned: {totalSpawned}");
     }
 
     // Fallback: pick random floor tiles
     private void SpawnRandom(HashSet<Vector2Int> floorPositions, Vector2? playerPos)
     {
         var allTiles = floorPositions.ToList();
-        int totalEnemies = Mathf.Max(1, allTiles.Count / 20); // roughly 1 per 20 tiles
+        int totalEnemies = Mathf.Max(3, allTiles.Count / 10); // at least 3, roughly 1 per 10 tiles
 
-        int spawned  = 0;
+        int spawned = 0;
         int attempts = 0;
 
-        while (spawned < totalEnemies && attempts < totalEnemies * 5)
+        while (spawned < totalEnemies && attempts < totalEnemies * 10)
         {
             attempts++;
             Vector2Int tile = allTiles[Random.Range(0, allTiles.Count)];

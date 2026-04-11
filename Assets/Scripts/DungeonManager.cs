@@ -1,6 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Central coordinator that wires the dungeon generator to the player spawner,
+/// decorator, and enemy spawner via the OnGenerationComplete event.
+///
+/// Attach this to the same GameObject as your AbstractDungeonGenerator.
+/// Assign all references in the Inspector.
+/// Calls GenerateDungeon() automatically in Start().
+/// </summary>
 public class DungeonManager : MonoBehaviour
 {
     [Header("References")]
@@ -29,7 +37,9 @@ public class DungeonManager : MonoBehaviour
             dungeonGenerator.OnGenerationComplete -= HandleGenerationComplete;
     }
 
-    // Public entry point — call this from UI buttons (e.g. Regenerate).
+    /// <summary>
+    /// Public entry point — call this from UI buttons (e.g. Regenerate).
+    /// </summary>
     public void GenerateDungeon()
     {
         // Clear decorations and enemies before regenerating
@@ -52,12 +62,22 @@ public class DungeonManager : MonoBehaviour
 
         if (enemySpawner != null)
         {
-            // Try to pass room centres from RoomFirstDungeonGenerator for better spread
             List<Vector2Int> roomCenters = null;
             if (dungeonGenerator is RoomFirstDungeonGenerator rfGen)
+            {
                 roomCenters = rfGen.GetRoomCenters();
+                Debug.Log($"[DungeonManager] Got {roomCenters?.Count ?? 0} room centers from RoomFirstDungeonGenerator.");
+            }
+            else
+            {
+                Debug.LogWarning("[DungeonManager] dungeonGenerator is not RoomFirstDungeonGenerator — room centers unavailable, using random fallback.");
+            }
 
             enemySpawner.SpawnEnemies(floorPositions, roomCenters);
+        }
+        else
+        {
+            Debug.LogError("[DungeonManager] EnemySpawner is NULL — drag it into the Inspector field on DungeonManager.");
         }
     }
 }
