@@ -3,16 +3,21 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
+
+    [Header("Attack")]
+    public Transform attackPoint;
+    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private float attackDamage = 10f;
+    [SerializeField] private float attackCooldown = 0.4f;
+    public LayerMask enemyLayers;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
-
-    public Transform attackPoint;
-    public float attackRange = 0.5f;
-    public LayerMask enemyLayers;
     private Vector2 moveInput;
+    private float attackTimer = 0f;
 
     private void Awake()
     {
@@ -29,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // ── Movement input ────────────────────────────────────────────────
         moveInput = Vector2.zero;
 
         if (UnityEngine.Input.GetKey(KeyCode.W) || UnityEngine.Input.GetKey(KeyCode.UpArrow))
@@ -43,17 +49,24 @@ public class PlayerController : MonoBehaviour
         if (moveInput.sqrMagnitude > 1f)
             moveInput.Normalize();
 
+        // ── Sprite flip ───────────────────────────────────────────────────
         if (moveInput.x > 0.01f)
             spriteRenderer.flipX = false;
         else if (moveInput.x < -0.01f)
             spriteRenderer.flipX = true;
 
+        // ── Animator ──────────────────────────────────────────────────────
         if (animator != null)
             animator.SetBool("isMoving", moveInput.sqrMagnitude > 0.01f);
 
-        if (Input.GetKey(KeyCode.Space))
+        // ── Attack cooldown tick ──────────────────────────────────────────
+        attackTimer -= Time.deltaTime;
+
+        // ── Attack input ──────────────────────────────────────────────────
+        if (Input.GetKey(KeyCode.Space) && attackTimer <= 0f)
         {
             Attack();
+            attackTimer = attackCooldown;
         }
     }
 
@@ -62,26 +75,33 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = moveInput * moveSpeed;
     }
 
-    void Attack()
+    private void Attack()
     {
         // Play attack animation
-        animator.SetTrigger("Attack");
+        if (animator != null)
+            animator.SetTrigger("Attack");
 
-        // Detect enemies in range of attack
+        if (attackPoint == null) return;
+
+        // Find all enemies in the overlap circle
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
-        // Damage enemies
-        foreach(Collider2D enemy in hitEnemies)
+        foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("Hit " + enemy.name);
+            // Deal damage via EnemyHealth component
+            EnemyHealth health = enemy.GetComponent<EnemyHealth>();
+            if (health != null)
+            {
+                health.TakeDamage(attackDamage);
+                Debug.Log($"Hit {enemy.name} for {attackDamage} damage.");
+            }
         }
     }
 
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
-        if (attackPoint == null)
-            return;
-
+        if (attackPoint == null) return;
+        Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

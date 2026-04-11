@@ -1,20 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Central coordinator that wires the dungeon generator to the player spawner
-/// and decorator via the OnGenerationComplete event.
-/// 
-/// Attach this to the same GameObject as your AbstractDungeonGenerator.
-/// Assign PlayerSpawner and DungeonDecorator in the Inspector.
-/// Calls GenerateDungeon() automatically in Start().
-/// </summary>
 public class DungeonManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private AbstractDungeonGenerator dungeonGenerator;
     [SerializeField] private PlayerSpawner playerSpawner;
     [SerializeField] private DungeonDecorator dungeonDecorator;
+    [SerializeField] private EnemySpawner enemySpawner;
 
     private void Awake()
     {
@@ -36,14 +29,15 @@ public class DungeonManager : MonoBehaviour
             dungeonGenerator.OnGenerationComplete -= HandleGenerationComplete;
     }
 
-    /// <summary>
-    /// Public entry point — call this from UI buttons (e.g. Regenerate).
-    /// </summary>
+    // Public entry point — call this from UI buttons (e.g. Regenerate).
     public void GenerateDungeon()
     {
-        // Clean up decorations before regenerating the tilemap
+        // Clear decorations and enemies before regenerating
         if (dungeonDecorator != null)
             dungeonDecorator.ClearDecorations();
+
+        if (enemySpawner != null)
+            enemySpawner.ClearEnemies();
 
         dungeonGenerator.GenerateDungeon();
     }
@@ -55,5 +49,15 @@ public class DungeonManager : MonoBehaviour
 
         if (dungeonDecorator != null)
             dungeonDecorator.Decorate(floorPositions);
+
+        if (enemySpawner != null)
+        {
+            // Try to pass room centres from RoomFirstDungeonGenerator for better spread
+            List<Vector2Int> roomCenters = null;
+            if (dungeonGenerator is RoomFirstDungeonGenerator rfGen)
+                roomCenters = rfGen.GetRoomCenters();
+
+            enemySpawner.SpawnEnemies(floorPositions, roomCenters);
+        }
     }
 }
