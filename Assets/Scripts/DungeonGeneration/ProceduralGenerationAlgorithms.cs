@@ -22,7 +22,8 @@ public static class ProceduralGenerationAlgorithms
         return path;
     }
 
-    // This method is used to create a corridor by using the random walk algorithm. It takes a start position and a corridor length as parameters and returns a list of Vector2Int positions that represent the corridor.
+    // This method is used to create a corridor by using the random walk algorithm.
+    // It takes a start position and a corridor length as parameters and returns a list of Vector2Int positions that represent the corridor.
     public static List<Vector2Int> RandomWalkCorridor(Vector2Int startPosition, int corridorLength)
     {
         List<Vector2Int> corridor = new List<Vector2Int>();
@@ -38,7 +39,9 @@ public static class ProceduralGenerationAlgorithms
         return corridor;
     }
 
-    // This method is used to split a space into smaller rooms using the binary space partitioning algorithm. It takes a BoundsInt object that represents the space to split, and minimum width and height for the rooms as parameters. It returns a list of BoundsInt objects that represent the rooms created from the split.
+    // This method is used to split a space into smaller rooms using the binary space partitioning algorithm.
+    // It takes a BoundsInt object that represents the space to split, and minimum width and height for the rooms as parameters.
+    // It returns a list of BoundsInt objects that represent the rooms created from the split.
     public static List<BoundsInt> BinarySpacePartitioning(BoundsInt spaceToSplit, int minWidth, int minHeight)
     {
         Queue<BoundsInt> roomsQueue = new Queue<BoundsInt>();
