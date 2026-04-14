@@ -135,8 +135,12 @@ public class EnemyAI : MonoBehaviour
             HealthSystem.Instance.TakeDamage(attackDamage);
         else
             Debug.LogWarning("EnemyAI: HealthSystem.Instance is null.");
-    }
 
+        if (animator != null)
+        {
+            animator.Play("Enemy_Attack", 0, 0f);
+        }
+    }
     private void MoveToward(Vector2 target, float speed)
     {
         Vector2 dir = ((Vector2)transform.position - (Vector2)target == Vector2.zero)

@@ -77,23 +77,21 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        // Play attack animation
         if (animator != null)
             animator.SetTrigger("Attack");
 
         if (attackPoint == null) return;
 
-        // Find all enemies in the overlap circle
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            // Deal damage via EnemyHealth component
-            EnemyHealth health = enemy.GetComponent<EnemyHealth>();
+            EnemyHealth health = enemy.GetComponentInParent<EnemyHealth>();
+
             if (health != null)
             {
+                Debug.Log($"Hit collider {enemy.name}, applying damage to root {health.gameObject.name}");
                 health.TakeDamage(attackDamage);
-                Debug.Log($"Hit {enemy.name} for {attackDamage} damage.");
             }
         }
     }

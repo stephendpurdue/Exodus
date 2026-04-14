@@ -7,7 +7,6 @@
 // Attach to the Hero.
 //==============================================================
 
-using System.Collections;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
@@ -89,16 +88,6 @@ public class HealthSystem : MonoBehaviour
 	//==============================================================
 	// Health Logic
 	//==============================================================
-	private void UpdateHealthBar()
-	{
-		if (currentHealthBar == null || healthText == null)
-			return;
-
-		float ratio = Mathf.Clamp01(hitPoint / maxHitPoint);
-		currentHealthBar.localScale = new Vector3(ratio, 1f, 1f);
-		healthText.text = $"{hitPoint:0}/{maxHitPoint:0}";
-	}
-
 	public void TakeDamage(float damage)
 	{
 		if (godMode)
@@ -106,7 +95,11 @@ public class HealthSystem : MonoBehaviour
 
 		hitPoint = Mathf.Clamp(hitPoint - damage, 0f, maxHitPoint);
 		UpdateGraphics();
-		StartCoroutine(OnPlayerHurt());
+
+		if (hitPoint <= 0f)
+			OnPlayerDied();
+		else if (PopupText.Instance != null)
+			PopupText.Instance.Popup("Ouch!", 1f, 1f);
 	}
 
 	public void HealDamage(float heal)
@@ -117,24 +110,12 @@ public class HealthSystem : MonoBehaviour
 
 	public void SetMaxHealth(float percentageIncrease)
 	{
-		maxHitPoint += maxHitPoint * (percentageIncrease / 100f);
-		hitPoint = Mathf.Min(hitPoint, maxHitPoint);
-		UpdateGraphics();
+		IncreaseMaxStat(ref maxHitPoint, ref hitPoint, percentageIncrease);
 	}
 
 	//==============================================================
 	// Mana Logic
 	//==============================================================
-	private void UpdateManaBar()
-	{
-		if (currentManaBar == null || manaText == null)
-			return;
-
-		float ratio = Mathf.Clamp01(manaPoint / maxManaPoint);
-		currentManaBar.localScale = new Vector3(ratio, 1f, 1f);
-		manaText.text = $"{manaPoint:0}/{maxManaPoint:0}";
-	}
-
 	public void UseMana(float mana)
 	{
 		manaPoint = Mathf.Clamp(manaPoint - mana, 0f, maxManaPoint);
@@ -149,9 +130,7 @@ public class HealthSystem : MonoBehaviour
 
 	public void SetMaxMana(float percentageIncrease)
 	{
-		maxManaPoint += maxManaPoint * (percentageIncrease / 100f);
-		manaPoint = Mathf.Min(manaPoint, maxManaPoint);
-		UpdateGraphics();
+		IncreaseMaxStat(ref maxManaPoint, ref manaPoint, percentageIncrease);
 	}
 
 	//==============================================================
@@ -159,29 +138,33 @@ public class HealthSystem : MonoBehaviour
 	//==============================================================
 	private void UpdateGraphics()
 	{
-		UpdateHealthBar();
-		UpdateManaBar();
+		UpdateBar(currentHealthBar, healthText, hitPoint, maxHitPoint);
+		UpdateBar(currentManaBar, manaText, manaPoint, maxManaPoint);
+	}
+
+	private void UpdateBar(RectTransform barTransform, UnityEngine.UI.Text barText, float current, float max)
+	{
+		if (barTransform == null || barText == null)
+			return;
+
+		float ratio = Mathf.Clamp01(current / max);
+		barTransform.localScale = new Vector3(ratio, 1f, 1f);
+		barText.text = $"{current:0}/{max:0}";
+	}
+
+	private void IncreaseMaxStat(ref float maxStat, ref float currentStat, float percentageIncrease)
+	{
+		maxStat += maxStat * (percentageIncrease / 100f);
+		currentStat = Mathf.Min(currentStat, maxStat);
+		UpdateGraphics();
 	}
 
 	//==============================================================
 	// Death Sequence
 	//==============================================================
-	private IEnumerator OnPlayerHurt()
-	{
-		if (PopupText.Instance != null)
-			PopupText.Instance.Popup("Ouch!", 1f, 1f);
-
-		if (hitPoint <= 0f)
-			yield return StartCoroutine(OnPlayerDied());
-		else
-			yield break;
-	}
-
-	private IEnumerator OnPlayerDied()
+	private void OnPlayerDied()
 	{
 		if (PopupText.Instance != null)
 			PopupText.Instance.Popup("You have died!", 1f, 1f);
-
-		yield break;
 	}
 }
