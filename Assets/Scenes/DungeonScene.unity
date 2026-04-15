@@ -14286,9 +14286,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1606379413}
   - component: {fileID: 1606379412}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DungeonDecorator
-  m_TagString: Untagged
+  m_TagString: Decoration
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14305,11 +14305,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b649f2c4574694abf1945ea1611a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DungeonDecorator
-  openPrefabs: []
+  openPrefabs:
+  - {fileID: 6521726160000581999, guid: a819cabaf79e5f7428506eae8f76f3e9, type: 3}
+  - {fileID: 110412435027533097, guid: fe19bc6bde2d8714ba8402264e27a709, type: 3}
+  - {fileID: 380401216691805303, guid: 2a6fc6dd692b9ea49a25ade284d02420, type: 3}
   openSpawnChance: 0.05
   edgePrefabs: []
   edgeSpawnChance: 0.08
-  cornerPrefabs: []
+  cornerPrefabs:
+  - {fileID: 5707527840463313881, guid: 58448120f3f99a947975a4d82465eabe, type: 3}
+  - {fileID: 9185106945121065361, guid: 39e365726cfbb764eb45c76e9a9e8a83, type: 3}
+  - {fileID: 6497053002605807108, guid: c8ffac26e360d1f48b1c2e32000bc1c0, type: 3}
   cornerSpawnChance: 0.15
 --- !u!4 &1606379413
 Transform:
@@ -14337,7 +14343,7 @@ GameObject:
   - component: {fileID: 1710772439}
   - component: {fileID: 1710772440}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

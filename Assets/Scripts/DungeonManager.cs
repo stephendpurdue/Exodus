@@ -1,14 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Central coordinator that wires the dungeon generator to the player spawner,
-/// decorator, and enemy spawner via the OnGenerationComplete event.
-///
-/// Attach this to the same GameObject as your AbstractDungeonGenerator.
-/// Assign all references in the Inspector.
-/// Calls GenerateDungeon() automatically in Start().
-/// </summary>
+// Central coordinator that wires the dungeon generator to the player spawner.
+// Calls GenerateDungeon() automatically in Start().
 public class DungeonManager : MonoBehaviour
 {
     [Header("References")]
@@ -37,9 +31,7 @@ public class DungeonManager : MonoBehaviour
             dungeonGenerator.OnGenerationComplete -= HandleGenerationComplete;
     }
 
-    /// <summary>
-    /// Public entry point — call this from UI buttons (e.g. Regenerate).
-    /// </summary>
+    // Public entry point — call this from UI buttons (e.g. Regenerate).
     public void GenerateDungeon()
     {
         // Clear decorations and enemies before regenerating
