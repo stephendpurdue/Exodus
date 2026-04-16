@@ -4,7 +4,6 @@
 // HealthSystem.Instance.HealDamage(float heal);
 // HealthSystem.Instance.UseMana(float mana);
 // HealthSystem.Instance.RestoreMana(float mana);
-// Attach to the Hero.
 //==============================================================
 
 using UnityEngine;
@@ -32,6 +31,9 @@ public class HealthSystem : MonoBehaviour
 
 	[Header("Debug")]
 	public bool godMode = false;
+
+	[Header("UI Menus")]
+	public GameObject gameOverMenu;
 
 	private float regenTimer = 0f;
 
@@ -164,7 +166,14 @@ public class HealthSystem : MonoBehaviour
 	//==============================================================
 	private void OnPlayerDied()
 	{
-		if (PopupText.Instance != null)
+		if (gameOverMenu != null)
+		{
+			gameOverMenu.SetActive(true);
+			Time.timeScale = 0f; // Pause the game
+		}
+		else if (PopupText.Instance != null)
+		{
 			PopupText.Instance.Popup("You have died!", 1f, 1f);
+		}
 	}
 }
