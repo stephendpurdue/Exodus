@@ -9,6 +9,7 @@ public class MainMenuUI : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button settingsButton;
 
     private void Start()
     {
@@ -17,6 +18,9 @@ public class MainMenuUI : MonoBehaviour
 
         if (quitButton != null)
             quitButton.onClick.AddListener(OnQuit);
+
+        if (settingsButton != null)
+            settingsButton.onClick.AddListener(OnSettings);
     }
 
     private void OnPlay()
@@ -27,10 +31,11 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnQuit()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
         Application.Quit();
-#endif
+    }
+
+    private void OnSettings()
+    {
+
     }
 }
