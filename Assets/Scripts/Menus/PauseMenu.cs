@@ -5,13 +5,20 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject container;
      void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            container.SetActive(true);
-            Time.timeScale = 0;
-        }
-    }
+     {
+         if (Input.GetKeyDown(KeyCode.Escape))
+         {
+             if (container.activeSelf)
+             {
+                 ResumeButton();
+             }
+             else
+             {
+                 container.SetActive(true);
+                 Time.timeScale = 0;
+             }
+         }
+     }
 
     public void ResumeButton()
     {

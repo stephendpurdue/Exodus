@@ -35,6 +35,22 @@ public class MainMenuUI : MonoBehaviour
         Application.Quit();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (settingsMenu != null && settingsMenu.activeSelf)
+            {
+                settingsMenu.SetActive(false);
+
+                if (settingsMenu.transform.childCount > 0)
+                {
+                    settingsMenu.transform.GetChild(0).gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
     private void OnSettings()
     {
         if (settingsMenu != null)
