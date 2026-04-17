@@ -10,6 +10,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button playButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private Button settingsButton;
+    [SerializeField] private GameObject settingsMenu;
 
     private void Start()
     {
@@ -36,6 +37,14 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnSettings()
     {
+        if (settingsMenu != null)
+        {
+            settingsMenu.SetActive(true);
 
+            if (settingsMenu.transform.childCount > 0)
+            {
+                settingsMenu.transform.GetChild(0).gameObject.SetActive(true);
+            }
+        }
     }
 }
