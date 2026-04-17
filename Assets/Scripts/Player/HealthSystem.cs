@@ -63,7 +63,7 @@ public class HealthSystem : MonoBehaviour
 	}
 
 	//==============================================================
-	// Regeneration
+	// Regeneration Logic
 	//==============================================================
 	private void RegenerateStats()
 	{

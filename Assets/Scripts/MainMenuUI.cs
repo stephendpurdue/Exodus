@@ -21,6 +21,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnPlay()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(dungeonSceneName);
     }
 
