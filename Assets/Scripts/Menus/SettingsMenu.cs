@@ -38,6 +38,12 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(options);
     }
 
+    public void SetResolution (int resolutionIndex)
+    {
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
     // Set the volume of the audio mixer based on the value of the slider
     public void SetVolume (float volume)
     {
