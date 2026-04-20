@@ -12,24 +12,28 @@ public class HealthSystem : MonoBehaviour
 {
 	public static HealthSystem Instance { get; private set; }
 
-	[Header("Health")]
+    // Health system.
+    [Header("Health")]
 	public RectTransform currentHealthBar;
 	public UnityEngine.UI.Text healthText;
 	public float hitPoint = 100f;
 	public float maxHitPoint = 100f;
 
+	// Mana system.
 	[Header("Mana")]
 	public RectTransform currentManaBar;
 	public UnityEngine.UI.Text manaText;
 	public float manaPoint = 100f;
 	public float maxManaPoint = 100f;
 
-	[Header("Regeneration")]
+    // Regeneration settings.
+    [Header("Regeneration")]
 	public bool regenerate = true;
 	public float regenAmount = 0.1f;
 	public float regenUpdateInterval = 1f;
 
-	[Header("Debug")]
+    // Debug settings.
+    [Header("Debug")]
 	public bool godMode = false;
 
 	[Header("References")]
