@@ -36,31 +36,51 @@ public class SettingsMenu : MonoBehaviour
         }
 
         resolutionDropdown.AddOptions(options);
+
+        // Load saved preferences or default to current screen/system settings
+        int savedResIndex = PlayerPrefs.GetInt("ResolutionPreference", currentResolutionIndex);
+        resolutionDropdown.value = savedResIndex;
+        resolutionDropdown.RefreshShownValue();
+
+        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("QualityPreference", QualitySettings.GetQualityLevel()));
+        Screen.fullScreen = PlayerPrefs.GetInt("FullscreenPreference", Screen.fullScreen ? 1 : 0) == 1;
+
+        if (PlayerPrefs.HasKey("VolumePreference"))
+        {
+            audioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("VolumePreference"));
+        }
     }
 
+    // Set the screen resolution based on the index of the dropdown menu
     public void SetResolution (int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        PlayerPrefs.SetInt("ResolutionPreference", resolutionIndex);
+        PlayerPrefs.Save();
     }
 
     // Set the volume of the audio mixer based on the value of the slider
     public void SetVolume (float volume)
     {
         audioMixer.SetFloat("Volume", volume);
+        PlayerPrefs.SetFloat("VolumePreference", volume);
+        PlayerPrefs.Save();
     }
 
     // Set the quality level based on the index of the dropdown menu
     public void SetQuality (int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
+        PlayerPrefs.SetInt("QualityPreference", qualityIndex);
+        PlayerPrefs.Save();
     }
 
     // Set the fullscreen mode based on the value of the toggle
     public void SetFullscreen(bool isfullscreen)
     {
         Screen.fullScreen = isfullscreen;
+        PlayerPrefs.SetInt("FullscreenPreference", isfullscreen ? 1 : 0);
+        PlayerPrefs.Save();
     }
-    
-
 }
