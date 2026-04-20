@@ -76,6 +76,7 @@ public class TilemapVisualizer : MonoBehaviour
         wallTilemap.ClearAllTiles();
     }
 
+    // Paints a single corner wall tile on the tilemap based on the binary type of the wall.
     internal void PaintSingleCornerWall(Vector2Int position, string BinaryType)
     {
         int typeAsInt = Convert.ToInt32(BinaryType, 2); // Converts Binary to Integer.

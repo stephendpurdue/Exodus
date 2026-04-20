@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class ParallaxBackground : MonoBehaviour
 {
     [System.Serializable]
+
+    // Represents a single layer in the parallax background, with its own image and movement settings.
     public class ParallaxLayer
     {
         public Image image;
@@ -22,6 +24,7 @@ public class ParallaxBackground : MonoBehaviour
     Vector2 smoothedMouse;
     Vector2[] originPositions;
 
+    // Called once at start to record original positions of layers.
     void Start()
     {
         originPositions = new Vector2[layers.Length];
@@ -33,6 +36,7 @@ public class ParallaxBackground : MonoBehaviour
         }
     }
 
+    // Called every frame to update layer positions based on time and mouse movement.
     void Update()
     {
         Vector2 mouseCentered = new Vector2(

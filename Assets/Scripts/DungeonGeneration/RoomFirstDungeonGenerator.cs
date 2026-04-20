@@ -21,10 +21,9 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     // Stored after generation so DungeonManager can pass them to EnemySpawner
     private List<Vector2Int> roomCenters = new List<Vector2Int>();
 
-    /// <summary>
-    /// Returns the list of room centre positions from the most recent generation.
-    /// Called by DungeonManager to pass spread data to EnemySpawner.
-    /// </summary>
+    // Returns the list of room centre positions from the most recent generation.
+    // Called by DungeonManager to pass spread data to EnemySpawner.
+   
     public List<Vector2Int> GetRoomCenters() => roomCenters;
 
     protected override void RunProceduralGeneration()
@@ -107,6 +106,8 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         return corridors;
     }
 
+    // This method creates a corridor between two room centers by first moving vertically from the current room center to the destination's y-coordinate,
+    // and then moving horizontally to the destination's x-coordinate. It returns a set of floor positions for the corridor.
     private HashSet<Vector2Int> CreateCorridor(Vector2Int currentRoomCenter, Vector2Int destination)
     {
         HashSet<Vector2Int> corridor = new HashSet<Vector2Int>();
@@ -142,6 +143,8 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         return corridor;
     }
 
+    // This method finds the closest room center to the current room center from a list of room centers.
+    // It calculates the distance from the current room center to each room center in the list and returns the closest one.
     private Vector2Int FindClosestPointTo(Vector2Int currentRoomCenter, List<Vector2Int> roomCentersList)
     {
         Vector2Int closest = Vector2Int.zero;
@@ -158,6 +161,8 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         return closest;
     }
 
+    // This method creates simple rooms by adding floor positions for each room based on the room's bounds.
+    // It takes a list of rooms as input and returns a set of floor positions for all the rooms.
     private HashSet<Vector2Int> CreateSimpleRooms(List<BoundsInt> roomList)
     {
         HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
