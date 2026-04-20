@@ -32,6 +32,14 @@ public class PlayerController : MonoBehaviour
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
     }
 
+    private void Start()
+    {
+        if (HealthSystem.Instance != null && animator != null)
+        {
+            HealthSystem.Instance.playerAnimator = animator;
+        }
+    }
+
     private void Update()
     {
         // ── Movement input ────────────────────────────────────────────────

@@ -32,6 +32,9 @@ public class HealthSystem : MonoBehaviour
 	[Header("Debug")]
 	public bool godMode = false;
 
+	[Header("References")]
+	public Animator playerAnimator;
+
 	[Header("UI Menus")]
 	public GameObject gameOverMenu;
 
@@ -166,6 +169,13 @@ public class HealthSystem : MonoBehaviour
 	//==============================================================
 	private void OnPlayerDied()
 	{
+		if (playerAnimator != null)
+		{
+			// Make sure the animation can play even when time is paused
+			playerAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+			playerAnimator.SetTrigger("Death");
+		}
+
 		if (gameOverMenu != null)
 		{
 			gameOverMenu.SetActive(true);
