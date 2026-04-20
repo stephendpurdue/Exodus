@@ -635,6 +635,7 @@ GameObject:
   - component: {fileID: 126726240}
   - component: {fileID: 126726239}
   - component: {fileID: 126726238}
+  - component: {fileID: 126726243}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -746,6 +747,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &126726243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126726237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: badfa0b6b35bd8e4da5b31014fb96681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SettingsMenu
+  audioMixer: {fileID: 24100000, guid: 3f9fd11186f447f4c9802dd3e573ecf4, type: 2}
 --- !u!1 &199548194
 GameObject:
   m_ObjectHideFlags: 0
@@ -3580,18 +3594,33 @@ MonoBehaviour:
   m_MultiSelect: 0
   m_Options:
     m_Options:
-    - m_Text: High
+    - m_Text: Low
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
     - m_Text: Medium
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 0.9960785, b: 0.9960785, a: 1}
-    - m_Text: Low
+    - m_Text: High
+      m_Image: {fileID: 0}
+      m_Color: {r: 1, g: 0.9960785, b: 0.9960785, a: 1}
+    - m_Text: Ultra
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 0.9960785, b: 0.9960785, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 126726243}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: SetQuality
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1193895759
 MonoBehaviour:
@@ -3685,7 +3714,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1257225781}
   - component: {fileID: 1257225780}
-  - component: {fileID: 1257225782}
   m_Layer: 5
   m_Name: SettingsMenu
   m_TagString: Untagged
@@ -3728,19 +3756,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1257225782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257225779}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: badfa0b6b35bd8e4da5b31014fb96681, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SettingsMenu
-  audioMixer: {fileID: 24100000, guid: 3f9fd11186f447f4c9802dd3e573ecf4, type: 2}
 --- !u!1 &1278141856
 GameObject:
   m_ObjectHideFlags: 0
@@ -4391,7 +4406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: High
+  m_text: Low
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4943,7 +4958,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1257225782}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 0
