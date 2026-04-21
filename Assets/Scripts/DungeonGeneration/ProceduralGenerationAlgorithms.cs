@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public static class ProceduralGenerationAlgorithms
 {
+    // This method is used to create a random walk path by using the random walk algorithm.
     public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int startPosition, int walkLength)
     {
         HashSet<Vector2Int> path = new HashSet<Vector2Int>();

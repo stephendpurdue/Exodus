@@ -54,6 +54,7 @@ public class EnemyHealth : MonoBehaviour
             StartCoroutine(Die());
     }
 
+    // Flashes the sprite to the hurt colour, then back to original after a short delay.
     private IEnumerator HurtFlash()
     {
         if (spriteRenderer == null) yield break;
@@ -65,6 +66,7 @@ public class EnemyHealth : MonoBehaviour
             spriteRenderer.color = originalColour;
     }
 
+    // Plays death animation, disables components, then destroys the GameObject after a delay.
     private IEnumerator Die()
     {
         if (isDead) yield break;

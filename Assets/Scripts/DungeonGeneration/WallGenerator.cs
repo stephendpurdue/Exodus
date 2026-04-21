@@ -15,6 +15,7 @@ public static class WallGenerator
         CreateCornerWalls(tilemapVisualizer, cornerWallPositions, floorPositions);
     }
 
+    // This method will create the corner walls around the floor positions. It will loop through the corner wall positions and check the neighbouring floor positions in the eight directions.
     private static void CreateCornerWalls(TilemapVisualizer tilemapVisualizer, HashSet<Vector2Int> cornerWallPositions, HashSet<Vector2Int> floorPositions)
     {
         foreach (var position in cornerWallPositions)

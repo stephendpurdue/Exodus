@@ -25,10 +25,8 @@ public abstract class AbstractDungeonGenerator : MonoBehaviour
 
     protected abstract void RunProceduralGeneration();
 
-    /// <summary>
-    /// Call this at the end of every concrete generator's RunProceduralGeneration
-    /// to broadcast the floor data to all subscribers.
-    /// </summary>
+    // Call this at the end of every concrete generator's RunProceduralGeneration
+    // to broadcast the floor data to all subscribers.
     protected void NotifyGenerationComplete(HashSet<Vector2Int> floorPositions)
     {
         OnGenerationComplete?.Invoke(floorPositions);

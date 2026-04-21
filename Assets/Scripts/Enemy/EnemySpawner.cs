@@ -30,11 +30,9 @@ public class EnemySpawner : MonoBehaviour
 
     // ── Called by DungeonManager ─────────────────────────────────────────────
 
-    /// <summary>
-    /// Clears existing enemies and spawns a fresh batch for the new dungeon.
-    /// Pass roomCenters from RoomFirstDungeonGenerator so we can place 1-2 per room.
-    /// If roomCenters is null/empty we fall back to random floor tile placement.
-    /// </summary>
+    // Clears existing enemies and spawns a fresh batch for the new dungeon.
+    // Pass roomCenters from RoomFirstDungeonGenerator so we can place 1-2 per room.
+    // If roomCenters is null/empty we fall back to random floor tile placement.
     public void SpawnEnemies(HashSet<Vector2Int> floorPositions, List<Vector2Int> roomCenters = null)
     {
         ClearEnemies();
@@ -72,6 +70,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    // Destroys all existing enemies. Called before spawning new ones on regen.
     public void ClearEnemies()
     {
         if (enemyContainer != null)

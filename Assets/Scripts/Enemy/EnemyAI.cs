@@ -32,6 +32,7 @@ public class EnemyAI : MonoBehaviour
     private float wanderTimer;
     private Vector2 spawnPosition;
 
+    // Initializes components, sets up Rigidbody2D properties, and configures collision layers to ignore the player.
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -50,6 +51,7 @@ public class EnemyAI : MonoBehaviour
             Physics2D.IgnoreLayerCollision(enemyLayer, playerLayer, true);
     }
 
+    // Initializes the spawn position and finds the player transform at the start of the game.
     private void Start()
     {
         spawnPosition = transform.position;
@@ -62,6 +64,7 @@ public class EnemyAI : MonoBehaviour
             Debug.LogWarning("EnemyAI: No GameObject tagged 'Player' found.");
     }
 
+    // Handles state transitions and calls the appropriate behavior method each frame.
     private void Update()
     {
         if (player == null) return;
@@ -97,6 +100,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    // If wanderRadius is set, the enemy will pick random points around its spawn position to walk to while idle.
     private void HandleIdle()
     {
         if (wanderRadius <= 0f) { SetIdle(); return; }
@@ -112,12 +116,13 @@ public class EnemyAI : MonoBehaviour
         if (Vector2.Distance(transform.position, wanderTarget) < 0.2f)
             SetIdle();
     }
-
+    // Moves toward the player at full speed, and handles animation and sprite flipping.
     private void HandleChase()
     {
         MoveToward(player.position, moveSpeed);
     }
 
+    // Stops movement and triggers the attack when the cooldown allows.
     private void HandleAttack()
     {
         SetIdle();
@@ -129,6 +134,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    // Applies damage to the player and triggers the attack animation.
     private void DealDamage()
     {
         if (HealthSystem.Instance != null)
@@ -141,6 +147,8 @@ public class EnemyAI : MonoBehaviour
             animator.Play("Enemy_Attack", 0, 0f);
         }
     }
+
+    // Moves the enemy toward a target position with the specified speed, and handles animation and sprite flipping.
     private void MoveToward(Vector2 target, float speed)
     {
         Vector2 dir = ((Vector2)transform.position - (Vector2)target == Vector2.zero)
@@ -159,6 +167,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    // Stops movement and resets animation parameters when idle.
     private void SetIdle()
     {
         rb.linearVelocity = Vector2.zero;

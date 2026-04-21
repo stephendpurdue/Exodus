@@ -20,6 +20,7 @@ public class CoinCollector : MonoBehaviour
         }
     }
 
+    // When the player collides with a coin, increment the coin count and update the UI text
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.transform.tag == "Coin")
