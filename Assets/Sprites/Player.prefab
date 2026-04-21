@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FootstepController
   stepInterval: 0.4
+  dustMaterial: {fileID: 2100000, guid: 191915ca702f02d438677dd043e3b132, type: 2}
 --- !u!114 &2007735400799971156
 MonoBehaviour:
   m_ObjectHideFlags: 0

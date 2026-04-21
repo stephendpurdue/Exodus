@@ -79,11 +79,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Apply movement in FixedUpdate for consistent physics behavior.
     private void FixedUpdate()
     {
         rb.linearVelocity = moveInput * moveSpeed;
     }
 
+    // Attack logic.
     private void Attack()
     {
         if (animator != null)

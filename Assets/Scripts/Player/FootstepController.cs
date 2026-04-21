@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class FootstepController : MonoBehaviour
 {
+    [Header("Settings")]
     public float stepInterval = 0.4f;
+
+    [Header("References")]
+    [Tooltip("Assign a Material using the URP/Particles/Unlit shader here so it gets included in the build!")]
+    public Material dustMaterial;
 
     private Vector2 _lastPos;
     private float _distanceTravelled;
@@ -82,8 +87,17 @@ public class FootstepController : MonoBehaviour
         colorOverLifetime.color = gradient;
 
         var renderer = ps.GetComponent<ParticleSystemRenderer>();
-        renderer.material = new Material(Shader.Find("Universal Render Pipeline/Particles/Unlit"));
-        renderer.material.color = Color.white; // let the particle color drive it
+        if (dustMaterial != null)
+        {
+            renderer.material = dustMaterial;
+        }
+        else
+        {
+            Shader defaultShader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
+            if (defaultShader == null) defaultShader = Shader.Find("Sprites/Default");
+            renderer.material = new Material(defaultShader);
+            renderer.material.color = Color.white; // let the particle color drive it
+        }
         renderer.sortingOrder = 999;
 
         Destroy(go, 1f);
