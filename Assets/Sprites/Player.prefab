@@ -202,6 +202,9 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
+  destructibleLayers:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &5440279142669998086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 209a467ae467a5e4da8a9da1b95a90cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinCollector
+  coinText: {fileID: 0}
 --- !u!1 &8942760382544536447
 GameObject:
   m_ObjectHideFlags: 0

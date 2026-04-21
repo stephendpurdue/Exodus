@@ -15825,6 +15825,9 @@ MonoBehaviour:
   - {fileID: 9185106945121065361, guid: 39e365726cfbb764eb45c76e9a9e8a83, type: 3}
   - {fileID: 6497053002605807108, guid: c8ffac26e360d1f48b1c2e32000bc1c0, type: 3}
   cornerSpawnChance: 0.15
+  keyPrefabs:
+  - {fileID: 1952308103681335345, guid: 4bc4ee0cfcd499b4dade51d804bd0794, type: 3}
+  keySpawnChance: 0.0025
 --- !u!4 &1606379413
 Transform:
   m_ObjectHideFlags: 0

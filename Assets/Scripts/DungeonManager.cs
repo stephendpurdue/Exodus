@@ -44,6 +44,7 @@ public class DungeonManager : MonoBehaviour
         dungeonGenerator.GenerateDungeon();
     }
 
+    // Called by the dungeon generator when generation is complete, passing the set of floor positions.
     private void HandleGenerationComplete(HashSet<Vector2Int> floorPositions)
     {
         if (playerSpawner != null)

@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackDamage = 10f;
     [SerializeField] private float attackCooldown = 0.4f;
     public LayerMask enemyLayers;
+    public LayerMask destructibleLayers;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -100,6 +101,18 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log($"Hit collider {enemy.name}, applying damage to root {health.gameObject.name}");
                 health.TakeDamage(attackDamage);
+            }
+        }
+
+        Collider2D[] hitDestructibles = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, destructibleLayers);
+
+        foreach (Collider2D destructible in hitDestructibles)
+        {
+            DestructibleDecoration prop = destructible.GetComponentInParent<DestructibleDecoration>();
+
+            if (prop != null)
+            {
+                prop.TakeDamage();
             }
         }
     }

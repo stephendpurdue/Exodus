@@ -25,6 +25,10 @@ public class DungeonDecorator : MonoBehaviour
     [SerializeField] private GameObject[] cornerPrefabs;
     [SerializeField, Range(0f, 1f)] private float cornerSpawnChance = 0.15f;
 
+    [Header("Keys")]
+    [SerializeField] private GameObject[] keyPrefabs;
+    [SerializeField, Range(0f, 1f)] private float keySpawnChance = 0.0125f;
+
     private Transform decorationContainer;
 
     // Called by DungeonManager after generation completes.
@@ -40,6 +44,10 @@ public class DungeonDecorator : MonoBehaviour
 
         foreach (var pos in floorPositions)
         {
+            // First, roll to see if a key spawns here. If it does, don't spawn another decoration on top of it.
+            if (TrySpawn(keyPrefabs, keySpawnChance, pos))
+                continue;
+
             int floorNeighbours = CountFloorNeighbours(pos, floorPositions);
 
             if (floorNeighbours >= 4)
@@ -58,6 +66,7 @@ public class DungeonDecorator : MonoBehaviour
             Destroy(decorationContainer.gameObject);
     }
 
+    // Helper method to count how many of the 4 cardinal neighbours of a tile are also floor tiles.
     private int CountFloorNeighbours(Vector2Int position, HashSet<Vector2Int> floorPositions)
     {
         int count = 0;
@@ -69,16 +78,19 @@ public class DungeonDecorator : MonoBehaviour
         return count;
     }
 
-    private void TrySpawn(GameObject[] prefabs, float chance, Vector2Int tilePos)
+    // Helper method to attempt spawning a random prefab from the given list at the specified tile position.
+    private bool TrySpawn(GameObject[] prefabs, float chance, Vector2Int tilePos)
     {
         if (prefabs == null || prefabs.Length == 0)
-            return;
+            return false;
 
         if (Random.value > chance)
-            return;
+            return false;
 
         var prefab = prefabs[Random.Range(0, prefabs.Length)];
         Vector3 worldPos = new Vector3(tilePos.x + 0.5f, tilePos.y + 0.5f, 0f);
         Instantiate(prefab, worldPos, Quaternion.identity, decorationContainer);
+
+        return true;
     }
 }

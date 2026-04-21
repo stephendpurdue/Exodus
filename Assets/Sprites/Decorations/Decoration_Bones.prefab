@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8298934149734562511}
   - component: {fileID: 8799622540347417388}
   - component: {fileID: 6092761675996348714}
-  m_Layer: 7
+  - component: {fileID: -2080832303233413560}
+  m_Layer: 8
   m_Name: Decoration_Bones
   m_TagString: Decoration
   m_Icon: {fileID: 0}
@@ -138,3 +139,15 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &-2080832303233413560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110412435027533097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31abaf337c68d494ea446adba9b4ae93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestructibleDecoration
