@@ -11,6 +11,7 @@ public class DungeonManager : MonoBehaviour
     [SerializeField] private DungeonDecorator dungeonDecorator;
     [SerializeField] private EnemySpawner enemySpawner;
 
+    // Automatically find the dungeon generator if not set in the Inspector, and subscribe to its completion event.
     private void Awake()
     {
         if (dungeonGenerator == null)
@@ -20,11 +21,13 @@ public class DungeonManager : MonoBehaviour
             dungeonGenerator.OnGenerationComplete += HandleGenerationComplete;
     }
 
+    // Automatically start dungeon generation when the scene starts.
     private void Start()
     {
         GenerateDungeon();
     }
 
+    //  Unsubscribe from events to prevent memory leaks.
     private void OnDestroy()
     {
         if (dungeonGenerator != null)
