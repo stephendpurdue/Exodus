@@ -29,6 +29,10 @@ public class DungeonDecorator : MonoBehaviour
     [SerializeField] private GameObject[] keyPrefabs;
     [SerializeField, Range(0f, 1f)] private float keySpawnChance = 0.0125f;
 
+    [Header("Wall Decorations (spawns on north-facing walls)")]
+    [SerializeField] private GameObject[] wallPrefabs;
+    [SerializeField, Range(0f, 1f)] private float wallSpawnChance = 0.1f;
+
     private Transform decorationContainer;
 
     // Called by DungeonManager after generation completes.
@@ -42,8 +46,20 @@ public class DungeonDecorator : MonoBehaviour
 
         decorationContainer = new GameObject("--- Decorations ---").transform;
 
+        HashSet<Vector2Int> occupiedWallTiles = new HashSet<Vector2Int>();
+
         foreach (var pos in floorPositions)
         {
+            // Check if there is a wall directly above this floor tile (north-facing wall)
+            Vector2Int northWall = pos + Vector2Int.up;
+            if (!floorPositions.Contains(northWall) && !occupiedWallTiles.Contains(northWall))
+            {
+                if (TrySpawn(wallPrefabs, wallSpawnChance, northWall))
+                {
+                    occupiedWallTiles.Add(northWall);
+                }
+            }
+
             // First, roll to see if a key spawns here. If it does, don't spawn another decoration on top of it.
             if (TrySpawn(keyPrefabs, keySpawnChance, pos))
                 continue;
