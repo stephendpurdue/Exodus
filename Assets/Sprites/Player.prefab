@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 2787853031306872292}
   - component: {fileID: 7009766015829555140}
   - component: {fileID: 8158561848987993824}
-  - component: {fileID: 2766624690479892629}
   - component: {fileID: 5985908238053690580}
   - component: {fileID: -9216342087187004237}
+  - component: {fileID: 2766624690479892629}
+  - component: {fileID: 5440279142669998086}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -123,26 +124,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &2766624690479892629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8260805920969396281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c5ab1d625ee9f4a915fb801cca4380, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 5
-  attackPoint: {fileID: 2299883968447015855}
-  attackRange: 1
-  attackDamage: 15
-  attackCooldown: 0.2
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!58 &5985908238053690580
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -201,6 +182,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2766624690479892629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8260805920969396281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c5ab1d625ee9f4a915fb801cca4380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  moveSpeed: 5
+  attackPoint: {fileID: 2299883968447015855}
+  attackRange: 1
+  attackDamage: 15
+  attackCooldown: 0.2
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &5440279142669998086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8260805920969396281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 209a467ae467a5e4da8a9da1b95a90cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinCollector
 --- !u!1 &8942760382544536447
 GameObject:
   m_ObjectHideFlags: 0
