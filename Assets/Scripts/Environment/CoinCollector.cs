@@ -25,7 +25,7 @@ public class CoinCollector : MonoBehaviour
         if (other.transform.tag == "Coin")
         {
             Coin++;
-            coinText.text = "Coin: " + Coin.ToString();
+            coinText.text = "Coins: " + Coin.ToString();
             Debug.Log(Coin);
             Destroy(other.gameObject);
         }

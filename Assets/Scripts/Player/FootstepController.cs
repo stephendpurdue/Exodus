@@ -7,11 +7,14 @@ public class FootstepController : MonoBehaviour
     private Vector2 _lastPos;
     private float _distanceTravelled;
 
+
+    // Initializes the last position to the player's starting position
     void Start()
     {
         _lastPos = transform.position;
     }
 
+    // Checks the distance traveled each frame and spawns dust if the player has moved enough
     void Update()
     {
         Vector2 currentPos = transform.position;
@@ -31,6 +34,7 @@ public class FootstepController : MonoBehaviour
         _lastPos = currentPos;
     }
 
+    // Spawns a simple dust particle effect at the given position
     void SpawnDust(Vector2 position)
     {
         GameObject go = new GameObject("FootstepDust");
