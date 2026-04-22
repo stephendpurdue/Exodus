@@ -2,10 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-/// <summary>
-/// In-game HUD for the dungeon scene.
-/// Provides Regenerate (re-runs the algorithm in-place) and Main Menu buttons.
-/// </summary>
+// In-game HUD for the dungeon scene.
+// Provides Regenerate (re-runs the algorithm in-place) and Main Menu buttons.
 public class GameHUD : MonoBehaviour
 {
     [SerializeField] private string mainMenuSceneName = "MainMenu";

@@ -151,6 +151,10 @@ public class EnemySpawner : MonoBehaviour
         if (enemyPrefabs.Length == 0) return;
         var prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
         Instantiate(prefab, worldPos, Quaternion.identity, enemyContainer);
+
+        // Tell the tracker we just successfully spawned a new enemy!
+        if (EnemyTracker.Instance != null)
+            EnemyTracker.Instance.RegisterEnemySpawned();
     }
 
     private Vector3 TileToWorld(Vector2Int tile)

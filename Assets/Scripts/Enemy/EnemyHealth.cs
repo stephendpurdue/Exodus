@@ -91,6 +91,9 @@ public class EnemyHealth : MonoBehaviour
             animator.Play("Enemy_Death", 0, 2f);
         }
 
+        if (EnemyTracker.Instance != null)
+            EnemyTracker.Instance.RegisterEnemyKilled();
+
         yield return new WaitForSeconds(deathDelay);
         Destroy(gameObject);
     }

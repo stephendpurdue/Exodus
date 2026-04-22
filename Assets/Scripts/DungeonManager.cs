@@ -44,6 +44,9 @@ public class DungeonManager : MonoBehaviour
         if (enemySpawner != null)
             enemySpawner.ClearEnemies();
 
+        if (EnemyTracker.Instance != null)
+            EnemyTracker.Instance.ResetTracker();
+
         dungeonGenerator.GenerateDungeon();
     }
 
