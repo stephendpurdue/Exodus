@@ -16249,6 +16249,7 @@ MonoBehaviour:
   hatchSpawnChance: 0.00125
   wallPrefabs:
   - {fileID: 1405844168953386151, guid: d1cfa7c7f338ee948881e0365db484e8, type: 3}
+  - {fileID: 3525327775732694453, guid: 73b45f65e7922e94281bf7c4a2d046d9, type: 3}
   wallSpawnChance: 0.1
 --- !u!4 &1606379413
 Transform:
