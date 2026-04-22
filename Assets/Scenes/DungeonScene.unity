@@ -16244,6 +16244,9 @@ MonoBehaviour:
   keyPrefabs:
   - {fileID: 1952308103681335345, guid: 4bc4ee0cfcd499b4dade51d804bd0794, type: 3}
   keySpawnChance: 0.0025
+  hatchPrefabs:
+  - {fileID: 6464798172453113574, guid: 418adac3a94892b4a824474c93524168, type: 3}
+  hatchSpawnChance: 0.00125
   wallPrefabs:
   - {fileID: 1405844168953386151, guid: d1cfa7c7f338ee948881e0365db484e8, type: 3}
   wallSpawnChance: 0.1

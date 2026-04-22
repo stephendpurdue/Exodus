@@ -29,6 +29,10 @@ public class DungeonDecorator : MonoBehaviour
     [SerializeField] private GameObject[] keyPrefabs;
     [SerializeField, Range(0f, 1f)] private float keySpawnChance = 0.0125f;
 
+    [Header("Hatches")]
+    [SerializeField] private GameObject[] hatchPrefabs;
+    [SerializeField, Range(0f, 1f)] private float hatchSpawnChance = 0.00125f;
+
     [Header("Wall Decorations (spawns on north-facing walls)")]
     [SerializeField] private GameObject[] wallPrefabs;
     [SerializeField, Range(0f, 1f)] private float wallSpawnChance = 0.1f;
@@ -60,6 +64,10 @@ public class DungeonDecorator : MonoBehaviour
                 }
             }
 
+            // Roll to see if a hatch spawns here. If it does, skip checking other decorations for this tile
+            if (TrySpawn(hatchPrefabs, hatchSpawnChance, pos))
+                continue;
+
             // First, roll to see if a key spawns here. If it does, don't spawn another decoration on top of it.
             if (TrySpawn(keyPrefabs, keySpawnChance, pos))
                 continue;
@@ -68,7 +76,8 @@ public class DungeonDecorator : MonoBehaviour
 
             if (floorNeighbours >= 4)
                 TrySpawn(openPrefabs, openSpawnChance, pos);
-            else if (floorNeighbours >= 2)
+            else if 
+                (floorNeighbours >= 2)
                 TrySpawn(edgePrefabs, edgeSpawnChance, pos);
             else
                 TrySpawn(cornerPrefabs, cornerSpawnChance, pos);
