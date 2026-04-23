@@ -8,8 +8,10 @@ using TMPro;
 public class SettingsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
-
     public TMP_Dropdown resolutionDropdown;
+    public TMP_Dropdown qualityDropdown;
+    public Toggle fullscreenToggle;
+    public Slider volumeSlider;
 
     Resolution[] resolutions;
 
@@ -17,7 +19,6 @@ public class SettingsMenu : MonoBehaviour
     void Start()
     {
         resolutions = Screen.resolutions;
-
         resolutionDropdown.ClearOptions();
 
         List<string> options = new List<string>();
@@ -37,18 +38,34 @@ public class SettingsMenu : MonoBehaviour
 
         resolutionDropdown.AddOptions(options);
 
-        // Load saved preferences or default to current screen/system settings
+        // Load Saved Data into Variables 
         int savedResIndex = PlayerPrefs.GetInt("ResolutionPreference", currentResolutionIndex);
-        resolutionDropdown.value = savedResIndex;
-        resolutionDropdown.RefreshShownValue();
+        int savedQualityIndex = PlayerPrefs.GetInt("QualityPreference", QualitySettings.GetQualityLevel());
+        bool savedFullscreen = PlayerPrefs.GetInt("FullscreenPreference", Screen.fullScreen ? 1 : 0) == 1;
+        float savedVolume = PlayerPrefs.GetFloat("VolumePreference", 0f);
 
-        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("QualityPreference", QualitySettings.GetQualityLevel()));
-        Screen.fullScreen = PlayerPrefs.GetInt("FullscreenPreference", Screen.fullScreen ? 1 : 0) == 1;
+        // Apply Saved Data to System 
+        Resolution savedRes = resolutions[savedResIndex];
+        Screen.SetResolution(savedRes.width, savedRes.height, savedFullscreen);
+        QualitySettings.SetQualityLevel(savedQualityIndex);
 
         if (PlayerPrefs.HasKey("VolumePreference"))
         {
-            audioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("VolumePreference"));
+            audioMixer.SetFloat("Volume", savedVolume);
         }
+
+        // Update UI Visuals to Match 
+        resolutionDropdown.value = savedResIndex;
+        resolutionDropdown.RefreshShownValue();
+
+        if (qualityDropdown != null)
+            qualityDropdown.value = savedQualityIndex;
+
+        if (fullscreenToggle != null)
+            fullscreenToggle.isOn = savedFullscreen;
+
+        if (volumeSlider != null && PlayerPrefs.HasKey("VolumePreference"))
+            volumeSlider.value = savedVolume;
     }
 
     // Set the screen resolution based on the index of the dropdown menu
