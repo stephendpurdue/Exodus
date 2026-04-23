@@ -4,6 +4,8 @@
 
 Exodus is a procedurally generated dungeon crawler created in Unity. Each run generates a unique dungeon layout using Binary Space Partitioning (BSP) for room placmement, and random-walk algorithms for corridor generation. The game is available to play on itch.io.
 
+https://stephendpurdue.itch.io/exodus
+
 ---
 
 ### Features:
