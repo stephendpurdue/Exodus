@@ -26,7 +26,7 @@ public class SettingsMenu : MonoBehaviour
 
     private void InitializeSettings()
     {
-        // 1. Gather all unique refresh rates for unique resolutions to avoid duplicate dropdown entries
+        // Gather all unique refresh rates for unique resolutions to avoid duplicate dropdown entries
         resolutions = Screen.resolutions
             .Select(r => new { r.width, r.height })
             .Distinct()
@@ -51,7 +51,7 @@ public class SettingsMenu : MonoBehaviour
         }
         resolutionDropdown.AddOptions(options);
 
-        // 2. Fetch or create default player prefs
+        //  Fetch or create default player prefs
         int savedResIndex = PlayerPrefs.GetInt("ResolutionPreference", currentSystemResIndex);
         int savedQualityIndex = PlayerPrefs.GetInt("QualityPreference", QualitySettings.GetQualityLevel());
         bool savedFullscreen = PlayerPrefs.GetInt("FullscreenPreference", Screen.fullScreen ? 1 : 0) == 1;
@@ -76,6 +76,7 @@ public class SettingsMenu : MonoBehaviour
             }
         }
 
+        // Security clamp for quality levels
         if (QualitySettings.names.Length > 0)
         {
             savedQualityIndex = Mathf.Clamp(savedQualityIndex, 0, QualitySettings.names.Length - 1);
@@ -90,6 +91,7 @@ public class SettingsMenu : MonoBehaviour
             }
         }
 
+        // Fullscreen toggle
         if (fullscreenToggle != null)
         {
             fullscreenToggle.onValueChanged.RemoveListener(SetFullscreen);
@@ -97,6 +99,7 @@ public class SettingsMenu : MonoBehaviour
             fullscreenToggle.onValueChanged.AddListener(SetFullscreen);
         }
 
+        // Volume slider
         if (volumeSlider != null)
         {
             volumeSlider.onValueChanged.RemoveListener(SetVolume);
@@ -107,6 +110,7 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
+    // Unity's audio mixer can be finicky about setting volume immediately on start.
     private IEnumerator SetVolumeDelayed(float volume)
     {
         yield return new WaitForEndOfFrame();
@@ -116,6 +120,7 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
+    // Event listener methods
     public void SetResolution(int resolutionIndex)
     {
         if (isInitializing) return;
@@ -126,7 +131,8 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.Save();
         Debug.Log($"Set Resolution: {resolution.width}x{resolution.height}");
     }
-
+    
+    // Volume preferences.
     public void SetVolume(float volume)
     {
         if (isInitializing) return;
@@ -136,6 +142,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    // Quality preferences.
     public void SetQuality(int qualityIndex)
     {
         if (isInitializing) return;
@@ -146,6 +153,7 @@ public class SettingsMenu : MonoBehaviour
         Debug.Log($"Set Quality: {qualityIndex}");
     }
 
+    // Fullscreen preferences.
     public void SetFullscreen(bool isFullscreen)
     {
         if (isInitializing) return;
