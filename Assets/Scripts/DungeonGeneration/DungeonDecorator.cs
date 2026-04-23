@@ -1,27 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Post-processing pass that places decoration prefabs on floor tiles
-
-// Categories:
-//   - Open (4 cardinal floor neighbours): room centres — torches, rugs, etc.
-//   - Edge (2-3 cardinal floor neighbours): along walls — barrels, shelves, etc.
-//   - Corner (0-1 cardinal floor neighbours): dead-ends/tight spots — cobwebs, skulls, etc.
-
 // Each category has its own prefab list and independent spawn probability.
 // All spawned decorations are parented under a container so they can be
 // bulk-destroyed on regeneration without scanning the entire scene.
 public class DungeonDecorator : MonoBehaviour
 {
-    [Header("Open Tile Decorations (4 floor neighbours)")]
+
+    // These arrays can be populated in the Inspector with any prefabs needed,
+    // just remember to add a reference to the generator.
+
+    [Header("Open Tile Decorations")]
     [SerializeField] private GameObject[] openPrefabs;
     [SerializeField, Range(0f, 1f)] private float openSpawnChance = 0.05f;
 
-    [Header("Edge Tile Decorations (2-3 floor neighbours)")]
+    [Header("Edge Tile Decorations)")]
     [SerializeField] private GameObject[] edgePrefabs;
     [SerializeField, Range(0f, 1f)] private float edgeSpawnChance = 0.08f;
 
-    [Header("Corner / Dead-End Decorations (0-1 floor neighbours)")]
+    [Header("Corner / Dead-End Decorations")]
     [SerializeField] private GameObject[] cornerPrefabs;
     [SerializeField, Range(0f, 1f)] private float cornerSpawnChance = 0.15f;
 
@@ -33,7 +30,7 @@ public class DungeonDecorator : MonoBehaviour
     [SerializeField] private GameObject[] hatchPrefabs;
     [SerializeField, Range(0f, 1f)] private float hatchSpawnChance = 0.00125f;
 
-    [Header("Wall Decorations (spawns on north-facing walls)")]
+    [Header("Wall Decorations")]
     [SerializeField] private GameObject[] wallPrefabs;
     [SerializeField, Range(0f, 1f)] private float wallSpawnChance = 0.1f;
 
