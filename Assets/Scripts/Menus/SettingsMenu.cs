@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -13,91 +14,145 @@ public class SettingsMenu : MonoBehaviour
     public Toggle fullscreenToggle;
     public Slider volumeSlider;
 
-    Resolution[] resolutions;
+    private Resolution[] resolutions;
+    private bool isInitializing = false;
 
-    // Populate the resolution dropdown menu with the available screen resolutions
     void Start()
     {
-        resolutions = Screen.resolutions;
+        isInitializing = true; // Lock event listeners
+        InitializeSettings();
+        isInitializing = false; // Unlock event listeners
+    }
+
+    private void InitializeSettings()
+    {
+        // 1. Gather all unique refresh rates for unique resolutions to avoid duplicate dropdown entries
+        resolutions = Screen.resolutions
+            .Select(r => new { r.width, r.height })
+            .Distinct()
+            .Select(r => new Resolution { width = r.width, height = r.height })
+            .ToArray();
+
         resolutionDropdown.ClearOptions();
-
         List<string> options = new List<string>();
+        int currentSystemResIndex = 0;
 
-        int currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
             options.Add(option);
 
+            // Best guess for default system resolution
             if (resolutions[i].width == Screen.currentResolution.width && 
                 resolutions[i].height == Screen.currentResolution.height)
             {
-                currentResolutionIndex = i;
+                currentSystemResIndex = i;
             }
         }
-
         resolutionDropdown.AddOptions(options);
 
-        // Load Saved Data into Variables 
-        int savedResIndex = PlayerPrefs.GetInt("ResolutionPreference", currentResolutionIndex);
+        // 2. Fetch or create default player prefs
+        int savedResIndex = PlayerPrefs.GetInt("ResolutionPreference", currentSystemResIndex);
         int savedQualityIndex = PlayerPrefs.GetInt("QualityPreference", QualitySettings.GetQualityLevel());
         bool savedFullscreen = PlayerPrefs.GetInt("FullscreenPreference", Screen.fullScreen ? 1 : 0) == 1;
         float savedVolume = PlayerPrefs.GetFloat("VolumePreference", 0f);
 
-        // Apply Saved Data to System 
-        Resolution savedRes = resolutions[savedResIndex];
-        Screen.SetResolution(savedRes.width, savedRes.height, savedFullscreen);
-        QualitySettings.SetQualityLevel(savedQualityIndex);
-
-        if (PlayerPrefs.HasKey("VolumePreference"))
+        // Security clamp to prevent crashes on foreign monitors
+        if (resolutions.Length > 0)
         {
-            audioMixer.SetFloat("Volume", savedVolume);
+            savedResIndex = Mathf.Clamp(savedResIndex, 0, resolutions.Length - 1);
+            Resolution savedRes = resolutions[savedResIndex];
+
+            // Unity quirk: Must pass refresh rate in SetResolution for it to stick in builds
+            Screen.SetResolution(savedRes.width, savedRes.height, savedFullscreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed, Screen.currentResolution.refreshRateRatio);
+
+            if (resolutionDropdown != null)
+            {
+                // Unhook listener, set value, rehook
+                resolutionDropdown.onValueChanged.RemoveListener(SetResolution);
+                resolutionDropdown.value = savedResIndex;
+                resolutionDropdown.RefreshShownValue();
+                resolutionDropdown.onValueChanged.AddListener(SetResolution);
+            }
         }
 
-        // Update UI Visuals to Match 
-        resolutionDropdown.value = savedResIndex;
-        resolutionDropdown.RefreshShownValue();
+        if (QualitySettings.names.Length > 0)
+        {
+            savedQualityIndex = Mathf.Clamp(savedQualityIndex, 0, QualitySettings.names.Length - 1);
+            QualitySettings.SetQualityLevel(savedQualityIndex);
 
-        if (qualityDropdown != null)
-            qualityDropdown.value = savedQualityIndex;
+            if (qualityDropdown != null)
+            {
+                qualityDropdown.onValueChanged.RemoveListener(SetQuality);
+                qualityDropdown.value = savedQualityIndex;
+                qualityDropdown.RefreshShownValue();
+                qualityDropdown.onValueChanged.AddListener(SetQuality);
+            }
+        }
 
         if (fullscreenToggle != null)
+        {
+            fullscreenToggle.onValueChanged.RemoveListener(SetFullscreen);
             fullscreenToggle.isOn = savedFullscreen;
+            fullscreenToggle.onValueChanged.AddListener(SetFullscreen);
+        }
 
-        if (volumeSlider != null && PlayerPrefs.HasKey("VolumePreference"))
+        if (volumeSlider != null)
+        {
+            volumeSlider.onValueChanged.RemoveListener(SetVolume);
             volumeSlider.value = savedVolume;
+            volumeSlider.onValueChanged.AddListener(SetVolume);
+
+            StartCoroutine(SetVolumeDelayed(savedVolume));
+        }
     }
 
-    // Set the screen resolution based on the index of the dropdown menu
-    public void SetResolution (int resolutionIndex)
+    private IEnumerator SetVolumeDelayed(float volume)
     {
+        yield return new WaitForEndOfFrame();
+        if (audioMixer != null)
+        {
+            audioMixer.SetFloat("Volume", volume);
+        }
+    }
+
+    public void SetResolution(int resolutionIndex)
+    {
+        if (isInitializing) return;
+
         Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed, Screen.currentResolution.refreshRateRatio);
         PlayerPrefs.SetInt("ResolutionPreference", resolutionIndex);
         PlayerPrefs.Save();
+        Debug.Log($"Set Resolution: {resolution.width}x{resolution.height}");
     }
 
-    // Set the volume of the audio mixer based on the value of the slider
-    public void SetVolume (float volume)
+    public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("Volume", volume);
+        if (isInitializing) return;
+
+        if (audioMixer != null) audioMixer.SetFloat("Volume", volume);
         PlayerPrefs.SetFloat("VolumePreference", volume);
         PlayerPrefs.Save();
     }
 
-    // Set the quality level based on the index of the dropdown menu
-    public void SetQuality (int qualityIndex)
+    public void SetQuality(int qualityIndex)
     {
+        if (isInitializing) return;
+
         QualitySettings.SetQualityLevel(qualityIndex);
         PlayerPrefs.SetInt("QualityPreference", qualityIndex);
         PlayerPrefs.Save();
+        Debug.Log($"Set Quality: {qualityIndex}");
     }
 
-    // Set the fullscreen mode based on the value of the toggle
-    public void SetFullscreen(bool isfullscreen)
+    public void SetFullscreen(bool isFullscreen)
     {
-        Screen.fullScreen = isfullscreen;
-        PlayerPrefs.SetInt("FullscreenPreference", isfullscreen ? 1 : 0);
+        if (isInitializing) return;
+
+        Screen.fullScreen = isFullscreen;
+        PlayerPrefs.SetInt("FullscreenPreference", isFullscreen ? 1 : 0);
         PlayerPrefs.Save();
+        Debug.Log($"Set Fullscreen: {isFullscreen}");
     }
 }

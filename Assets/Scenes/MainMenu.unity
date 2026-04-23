@@ -765,6 +765,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SettingsMenu
   audioMixer: {fileID: 24100000, guid: 3f9fd11186f447f4c9802dd3e573ecf4, type: 2}
   resolutionDropdown: {fileID: 1071014050}
+  qualityDropdown: {fileID: 0}
+  fullscreenToggle: {fileID: 0}
+  volumeSlider: {fileID: 0}
 --- !u!1 &199548194
 GameObject:
   m_ObjectHideFlags: 0
