@@ -8,8 +8,6 @@ This game was created as the capstone project for my BSc in Game Development.
 
 https://stephendpurdue.itch.io/exodus
 
----
-
 ### Features:
 
 - Procedurally generated dungeons using BSP and Random Walk algorithms.
