@@ -17,6 +17,54 @@ https://stephendpurdue.itch.io/exodus
 - High replayability with cross-platform control support.
 - Built as a standalone Unity project with clear structure to ensure easy updating or extension by other developers.
 
-### Testing:
+### Quick Start:
 
 To run Exodus, either clone the repo or download the .zip file and import to Unity, the game requires Unity version 6000.3.5f2.
+
+### Project Structure:
+
+```text
+Assets/
+├─ Editor/
+├─ Miscellaneous/
+│  ├─ Health/
+│  └─ TextMesh Pro/
+├─ Scripts/
+│  ├─ Data/
+│  │  └─ SimpleRandomWalkSO.cs
+│  ├─ DungeonGeneration/
+│  │  ├─ AbstractDungeonGenerator.cs
+│  │  ├─ CorridorFirstDungeonGenerator.cs
+│  │  ├─ DungeonDecorator.cs
+│  │  ├─ ProceduralGenerationAlgorithms.cs
+│  │  ├─ RoomFirstDungeonGenerator.cs
+│  │  ├─ SimpleRandomWalkDungeonGenerator.cs
+│  │  ├─ TilemapVisualizer.cs
+│  │  ├─ WallGenerator.cs
+│  │  └─ WallTypesHelper.cs
+│  ├─ Enemy/
+│  │  ├─ EnemyAI.cs
+│  │  ├─ EnemyHealth.cs
+│  │  └─ EnemySpawner.cs
+│  ├─ Environment/
+│  │  ├─ CoinCollector.cs
+│  │  ├─ DestructibleDecoration.cs
+│  │  └─ KeyCollector.cs
+│  ├─ Menus/
+│  │  ├─ GameOverMenu.cs
+│  │  ├─ MainMenuPostProcessing.cs
+│  │  ├─ MainMenuUI.cs
+│  │  ├─ ParallaxBackground.cs
+│  │  ├─ PauseMenu.cs
+│  │  └─ SettingsMenu.cs
+│  ├─ Player/
+│  │  ├─ CameraFollow.cs
+│  │  ├─ FootstepController.cs
+│  │  ├─ GameHUD.cs
+│  │  ├─ HealthSystem.cs
+│  │  ├─ PlayerController.cs
+│  │  └─ PlayerSpawner.cs
+│  ├─ UI/
+│  │  └─ EnemyTracker.cs
+│  └─ DungeonManager.cs
+```
