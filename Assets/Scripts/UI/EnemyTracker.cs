@@ -25,7 +25,7 @@ public class EnemyTracker : MonoBehaviour
         Instance = this;
     }
 
-    // Call this method to reset the tracker at the start of a new level or game
+    // Called to reset the tracker at the start of a new level or game
     public void ResetTracker()
     {
         totalEnemiesSpawned = 0;
@@ -34,7 +34,7 @@ public class EnemyTracker : MonoBehaviour
         UpdateUI();
     }
 
-    // This method should be called whenever an enemy is spawned
+    // This method is called whenever an enemy is spawned
     public void RegisterEnemySpawned()
     {
         totalEnemiesSpawned++;
@@ -42,7 +42,7 @@ public class EnemyTracker : MonoBehaviour
         UpdateUI();
     }
 
-    // This method should be called whenever an enemy is killed
+    // This method is called whenever an enemy is killed
     public void RegisterEnemyKilled()
     {
         currentEnemiesAlive--;
@@ -55,12 +55,12 @@ public class EnemyTracker : MonoBehaviour
         }
     }
 
-    // This method can be called to update the UI whenever there's a change in enemy counts
+    // This method is called to update the UI whenever there's a change in enemy counts
     private void UpdateUI()
     {
         if (enemyCountText != null)
         {
-            enemyCountText.text = $"Enemies Defeated: {totalEnemiesKilled} / {totalEnemiesSpawned}";
+            enemyCountText.text = $"Enemies: {totalEnemiesKilled} / {totalEnemiesSpawned}";
         }
     }
 
@@ -72,6 +72,8 @@ public class EnemyTracker : MonoBehaviour
         {
             victoryMenu.SetActive(true);
             Time.timeScale = 0f; // Pause the game
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }
