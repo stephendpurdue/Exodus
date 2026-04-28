@@ -12,19 +12,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackDamage = 10f;
     [SerializeField] private float attackCooldown = 0.4f;
     public LayerMask enemyLayers;
-    public LayerMask destructibleLayers;
+    public LayerMask destructibleLayers;    
+    public AudioClip attackSound;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private Vector2 moveInput;
     private float attackTimer = 0f;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 0f;
@@ -90,6 +93,9 @@ public class PlayerController : MonoBehaviour
     {
         if (animator != null)
             animator.SetTrigger("Attack");
+
+        if (audioSource != null && attackSound != null)
+            audioSource.PlayOneShot(attackSound);
 
         if (attackPoint == null) return;
 

@@ -67,7 +67,6 @@ public class EnemyAI : MonoBehaviour
     // Handles state transitions and calls the appropriate behavior method each frame.
     private void Update()
     {
-        if (player == null) return;
 
         attackTimer -= Time.deltaTime;
         wanderTimer -= Time.deltaTime;
