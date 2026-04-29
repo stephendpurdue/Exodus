@@ -208,6 +208,7 @@ MonoBehaviour:
   destructibleLayers:
     serializedVersion: 2
     m_Bits: 256
+  attackSound: {fileID: 8300000, guid: 99dfc4415a8852e429a839b9d7f3d6aa, type: 3}
 --- !u!114 &5440279142669998086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +260,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 99dfc4415a8852e429a839b9d7f3d6aa, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
