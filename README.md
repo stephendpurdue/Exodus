@@ -19,50 +19,49 @@ https://stephendpurdue.itch.io/exodus
 
 To run Exodus, either clone the repo or download the .zip file and import it to Unity; the game requires Unity version 6000.3.5f2.
 
-### Project Structure:
+### Project Structure
 
 ```text
 Assets/
-├─ Editor/
-├─ Miscellaneous/
-│  ├─ Health/
-│  └─ TextMesh Pro/
-├─ Scripts/
-│  ├─ Data/
-│  │  └─ SimpleRandomWalkSO.cs
-│  ├─ DungeonGeneration/
-│  │  ├─ AbstractDungeonGenerator.cs
-│  │  ├─ CorridorFirstDungeonGenerator.cs
-│  │  ├─ DungeonDecorator.cs
-│  │  ├─ ProceduralGenerationAlgorithms.cs
-│  │  ├─ RoomFirstDungeonGenerator.cs
-│  │  ├─ SimpleRandomWalkDungeonGenerator.cs
-│  │  ├─ TilemapVisualizer.cs
-│  │  ├─ WallGenerator.cs
-│  │  └─ WallTypesHelper.cs
-│  ├─ Enemy/
-│  │  ├─ EnemyAI.cs
-│  │  ├─ EnemyHealth.cs
-│  │  └─ EnemySpawner.cs
-│  ├─ Environment/
-│  │  ├─ CoinCollector.cs
-│  │  ├─ DestructibleDecoration.cs
-│  │  └─ KeyCollector.cs
-│  ├─ Menus/
-│  │  ├─ GameOverMenu.cs
-│  │  ├─ MainMenuPostProcessing.cs
-│  │  ├─ MainMenuUI.cs
-│  │  ├─ ParallaxBackground.cs
-│  │  ├─ PauseMenu.cs
-│  │  └─ SettingsMenu.cs
-│  ├─ Player/
-│  │  ├─ CameraFollow.cs
-│  │  ├─ FootstepController.cs
-│  │  ├─ GameHUD.cs
-│  │  ├─ HealthSystem.cs
-│  │  ├─ PlayerController.cs
-│  │  └─ PlayerSpawner.cs
-│  ├─ UI/
-│  │  └─ EnemyTracker.cs
-│  └─ DungeonManager.cs
+├── Editor/
+├── Miscellaneous/
+└── Scripts/
+    ├── Data/
+    │   └── SimpleRandomWalkSO.cs
+    ├── DungeonGeneration/
+    │   ├── AbstractDungeonGenerator.cs
+    │   ├── CorridorFirstDungeonGenerator.cs
+    │   ├── DungeonDecorator.cs
+    │   ├── ProceduralGenerationAlgorithms.cs
+    │   ├── RoomFirstDungeonGenerator.cs
+    │   ├── SimpleRandomWalkDungeonGenerator.cs
+    │   ├── TilemapVisualizer.cs
+    │   ├── WallGenerator.cs
+    │   └── WallTypesHelper.cs
+    ├── Enemy/
+    │   ├── EnemyAI.cs
+    │   ├── EnemyHealth.cs
+    │   └── EnemySpawner.cs
+    ├── Environment/
+    │   ├── CoinCollector.cs
+    │   ├── DestructibleDecoration.cs
+    │   └── KeyCollector.cs
+    ├── Menus/
+    │   ├── GameOverMenu.cs
+    │   ├── MainMenuPostProcessing.cs
+    │   ├── MainMenuUI.cs
+    │   ├── MenuNavigator.cs
+    │   ├── ParralaxBackground.cs
+    │   ├── PauseMenu.cs
+    │   └── SettingsMenu.cs
+    ├── Player/
+    │   ├── CameraFollow.cs
+    │   ├── FootstepController.cs
+    │   ├── GameHUD.cs
+    │   ├── HealthSystem.cs
+    │   ├── PlayerController.cs
+    │   └── PlayerSpawner.cs
+    ├── UI/
+    │   └── EnemyTracker.cs
+    └── DungeonManager.cs
 ```
