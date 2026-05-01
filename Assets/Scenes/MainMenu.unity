@@ -636,6 +636,7 @@ GameObject:
   - component: {fileID: 126726239}
   - component: {fileID: 126726238}
   - component: {fileID: 126726243}
+  - component: {fileID: 126726244}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -768,6 +769,24 @@ MonoBehaviour:
   qualityDropdown: {fileID: 0}
   fullscreenToggle: {fileID: 0}
   volumeSlider: {fileID: 0}
+--- !u!114 &126726244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126726237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79156c2462d863c409ce9f2790550b1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuNavigator
+  menuButtons:
+  - {fileID: 1434454407}
+  - {fileID: 481814788}
+  - {fileID: 260795552}
+  highlightColor: {r: 1, g: 0.8, b: 0, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &199548194
 GameObject:
   m_ObjectHideFlags: 0
